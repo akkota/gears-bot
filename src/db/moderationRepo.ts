@@ -1,6 +1,6 @@
 import { supabase } from "./supabase.js";
 
-export type ModerationAction = "purge" | "mute" | "kick";
+export type ModerationAction = "purge" | "mute" | "kick" | "ban" | "massban";
 
 export interface CreateModerationCaseInput {
   guildId: string;
@@ -34,6 +34,13 @@ export interface UpsertActiveMuteInput {
   mutedByUserId: string;
   reason: string | null;
   expiresAt: string | null;
+}
+
+export interface CreateModerationCaseTargetInput {
+  caseId: string;
+  targetUserId: string;
+  success: boolean;
+  errorMessage: string | null;
 }
 
 export async function createModerationCase(
@@ -102,5 +109,26 @@ export async function upsertActiveMute(
 
   if (error) {
     throw new Error(`Failed to upsert active mute: ${error.message}`);
+  }
+}
+
+export async function createModerationCaseTargets(
+  inputs: CreateModerationCaseTargetInput[],
+): Promise<void> {
+  if (inputs.length === 0) {
+    return;
+  }
+
+  const { error } = await supabase.from("moderation_case_targets").insert(
+    inputs.map((input) => ({
+      case_id: input.caseId,
+      target_user_id: input.targetUserId,
+      success: input.success,
+      error_message: input.errorMessage,
+    })),
+  );
+
+  if (error) {
+    throw new Error(`Failed to create moderation case targets: ${error.message}`);
   }
 }

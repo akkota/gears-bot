@@ -10,6 +10,8 @@
 - `/unset-srmod-role delete_role?:<boolean>`: Owner or configured Admin role can unset/delete configured SrMod role.
 - `/unset-mod-role delete_role?:<boolean>`: Owner or configured Admin role can unset/delete configured Mod role.
 - `/set-log-channel channel:<channel>`: Sets bot log channel (owner or configured Admin role).
+- `/ban user_or_id:<mention|id> delete_message_days?:<0-7> reason?:<text>`: Bans a user by mention or ID.
+- `/massban user_ids:<id,id...|id id...> reason?:<text>`: Bans multiple users by comma/space separated IDs.
 - `/kick user:<user> reason?:<text>`: Kicks a member from the server.
 - `/mute user:<user> reason?:<text>`: Voice-mutes a member who is currently connected to a voice channel.
 - `/purge amount:<1-100> user?:<user> reason?:<text>`: Deletes recent messages in the current channel. Optional user filter.

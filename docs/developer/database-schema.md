@@ -61,3 +61,12 @@ It does not persist each individual deleted message.
 `/kick` currently writes:
 
 - `moderation_cases` with `action='kick'`
+
+`/ban` currently writes:
+
+- `moderation_cases` with `action='ban'`
+
+`/massban` currently writes:
+
+- `moderation_cases` with `action='massban'`
+- `moderation_case_targets` rows for per-target success/failure outcomes

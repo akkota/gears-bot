@@ -20,6 +20,8 @@ Implemented commands currently:
 - `/unset-admin-role`
 - `/unset-srmod-role`
 - `/unset-mod-role`
+- `/ban`
+- `/massban`
 - `/kick`
 - `/mute`
 - `/purge`
@@ -72,6 +74,26 @@ Kick command behavior:
 - Uses shared actor-vs-target and bot-vs-target hierarchy checks.
 - Kicks the member, then persists a `moderation_cases` row with `action='kick'`.
 - Sends a log embed to configured log channel when available.
+
+Ban command behavior:
+
+- `/ban` requires bot-level `srmod` and native Discord `BanMembers` for both user and bot.
+- Accepts a mention or user ID via `user_or_id`; supports non-member bans by ID.
+- If target is currently a guild member, applies shared actor-vs-target and bot-vs-target hierarchy checks.
+- If target is not in guild, skips actor-vs-target hierarchy because role data is unavailable.
+- Bans the user, then persists a `moderation_cases` row with `action='ban'`.
+- Sends a log embed to configured log channel when available.
+
+Massban command behavior:
+
+- `/massban` requires bot-level `admin` and native Discord `BanMembers` for both user and bot.
+- Accepts comma/space-separated IDs and validates each target ID format.
+- Creates one `moderation_cases` row with `action='massban'`.
+- Processes users one-by-one and continues on failures.
+- For guild members, applies actor-vs-target and bot-vs-target hierarchy checks per target.
+- For non-guild IDs, skips actor-vs-target hierarchy because role data is unavailable.
+- Persists per-target success/failure rows into `moderation_case_targets`.
+- Sends a summary log embed to configured log channel when available.
 
 ## Pattern For Future Commands
 

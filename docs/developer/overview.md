@@ -28,6 +28,8 @@ Current implemented bootstrap features:
   - `/unset-admin-role`
   - `/unset-srmod-role`
   - `/unset-mod-role`
+  - `/ban`
+  - `/massban`
   - `/kick`
   - `/mute`
   - `/purge`
@@ -78,6 +80,8 @@ Current implementation status:
 - Unset commands support clear-only and explicit role deletion (`delete_role=true`).
 - Setup/unset actions persist to Supabase and emit setup logs to the configured log channel when possible.
 - `/mute` uses Discord voice mute, shared actor/bot hierarchy checks, and persists to `moderation_cases` + `active_mutes`.
+- `/ban` is implemented with srmod-level bot permission checks, native Discord Ban Members checks, member-aware hierarchy enforcement, and moderation case persistence (`moderation_cases`).
+- `/massban` is implemented with admin-level bot permission checks, native Discord Ban Members checks, per-target hierarchy enforcement where role data exists, and persistence to `moderation_cases` + `moderation_case_targets`.
 - `/kick` is implemented with srmod-level bot permission checks, native Discord Kick Members checks, shared hierarchy checks, and moderation case persistence (`moderation_cases`).
 - `/purge` is implemented with mod-level bot permission checks, native Discord Manage Messages checks, and summary-only persistence (`moderation_cases` + `purge_logs`).
 - Info commands are stateless, use live Discord data, and perform no database writes.

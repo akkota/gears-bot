@@ -22,6 +22,8 @@ Configured role IDs are stored in `guild_settings`.
 - `/set-mod-role`: Server owner or configured Admin role
 - `/unset-mod-role`: Server owner or configured Admin role
 - `/set-log-channel`: Server owner or configured Admin role
+- `/ban`: SrMod+ and Discord `Ban Members`
+- `/massban`: Admin+ and Discord `Ban Members`
 - `/kick`: SrMod+ and Discord `Kick Members`
 - `/mute`: SrMod+ and Discord `Mute Members`
 - `/purge`: Mod+ and Discord `Manage Messages`
