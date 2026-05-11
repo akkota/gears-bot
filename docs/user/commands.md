@@ -595,6 +595,34 @@ Example success response:
 Common errors:
 - Role not found.
 
+## `/reaction-role setup`
+Purpose:
+- Register an existing message in the current channel as a reaction role panel.
+
+Who can use it:
+- Admin and above.
+
+Example:
+- `/reaction-role setup message_id:123456789012345678`
+- `/reaction-role setup message_id:123456789012345678 title:Pick Your Roles`
+
+Inputs:
+- `message_id` (required): The ID of a message already posted in this channel. Right-click the message in Discord and choose **Copy Message ID** to get it. Must be a valid Discord message ID (a long number, at least 17 digits). Do not copy a user ID or channel ID.
+- `title` (optional): A short label for this panel (up to 100 characters).
+
+What happens:
+- Bot looks up the message in the current channel to confirm it exists.
+- Bot registers the message as a reaction role panel in the database.
+
+Example success response:
+- `Reaction role panel registered for message 123456789012345678 (Pick Your Roles).`
+
+Common errors:
+- `That doesn't look like a valid Discord message ID.`: The value you entered contains letters, symbols, or is too short. Use **Copy Message ID** from Discord.
+- `Could not find that message in this channel.`: The ID is valid but does not belong to a message in the current channel. Run the command in the same channel as the message.
+- `That message is already registered as a reaction role panel in this server.`: This message ID is already set up.
+- Permission denied if user is below Admin level.
+
 ## Moderation Policy Note
 - Team policy: 3 warnings should trigger a 1-day mute.
 - Current status: `/warn` is not implemented yet in this build, so this policy is not automated yet.
