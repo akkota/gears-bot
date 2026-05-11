@@ -20,6 +20,9 @@ Implemented commands currently:
 - `/unset-admin-role`
 - `/unset-srmod-role`
 - `/unset-mod-role`
+- `/kick`
+- `/mute`
+- `/purge`
 - `/userinfo`
 - `/serverinfo`
 - `/roleinfo`
@@ -48,6 +51,27 @@ Info command behavior:
 
 - `/userinfo`, `/serverinfo`, and `/roleinfo` read live Discord state only.
 - These commands do not touch database tables and do not store usage rows.
+
+Purge command behavior:
+
+- `/purge` requires bot-level `mod` and native Discord `ManageMessages` for both user and bot.
+- Stores one moderation case and one purge summary row.
+- Does not store individual deleted messages.
+- Handles partial deletes when old messages are skipped by Discord bulk delete rules.
+
+Mute command behavior:
+
+- `/mute` requires bot-level `srmod` and native Discord `MuteMembers` for both user and bot.
+- Uses shared actor-vs-target and bot-vs-target hierarchy checks.
+- Applies Discord voice mute to members in voice channels, then persists `moderation_cases` + `active_mutes`.
+- Sends a log embed to configured log channel when available.
+
+Kick command behavior:
+
+- `/kick` requires bot-level `srmod` and native Discord `KickMembers` for both user and bot.
+- Uses shared actor-vs-target and bot-vs-target hierarchy checks.
+- Kicks the member, then persists a `moderation_cases` row with `action='kick'`.
+- Sends a log embed to configured log channel when available.
 
 ## Pattern For Future Commands
 

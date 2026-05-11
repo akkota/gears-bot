@@ -28,6 +28,9 @@ Current implemented bootstrap features:
   - `/unset-admin-role`
   - `/unset-srmod-role`
   - `/unset-mod-role`
+  - `/kick`
+  - `/mute`
+  - `/purge`
   - `/userinfo`
   - `/serverinfo`
   - `/roleinfo`
@@ -74,4 +77,7 @@ Current implementation status:
 - Staff role setup commands can select existing roles or auto-create/reuse exact defaults (`Admin`, `SrMod`, `Mod`) when omitted.
 - Unset commands support clear-only and explicit role deletion (`delete_role=true`).
 - Setup/unset actions persist to Supabase and emit setup logs to the configured log channel when possible.
+- `/mute` uses Discord voice mute, shared actor/bot hierarchy checks, and persists to `moderation_cases` + `active_mutes`.
+- `/kick` is implemented with srmod-level bot permission checks, native Discord Kick Members checks, shared hierarchy checks, and moderation case persistence (`moderation_cases`).
+- `/purge` is implemented with mod-level bot permission checks, native Discord Manage Messages checks, and summary-only persistence (`moderation_cases` + `purge_logs`).
 - Info commands are stateless, use live Discord data, and perform no database writes.

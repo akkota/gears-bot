@@ -29,6 +29,7 @@ const CREATED_ROLE_PERMISSIONS: Record<StaffRoleKind, PermissionResolvable[]> = 
   admin: [PermissionFlagsBits.Administrator],
   srmod: [
     PermissionFlagsBits.ModerateMembers,
+    PermissionFlagsBits.MuteMembers,
     PermissionFlagsBits.ManageMessages,
     PermissionFlagsBits.KickMembers,
     PermissionFlagsBits.BanMembers,

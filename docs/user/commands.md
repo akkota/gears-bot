@@ -10,6 +10,9 @@
 - `/unset-srmod-role delete_role?:<boolean>`: Owner or configured Admin role can unset/delete configured SrMod role.
 - `/unset-mod-role delete_role?:<boolean>`: Owner or configured Admin role can unset/delete configured Mod role.
 - `/set-log-channel channel:<channel>`: Sets bot log channel (owner or configured Admin role).
+- `/kick user:<user> reason?:<text>`: Kicks a member from the server.
+- `/mute user:<user> reason?:<text>`: Voice-mutes a member who is currently connected to a voice channel.
+- `/purge amount:<1-100> user?:<user> reason?:<text>`: Deletes recent messages in the current channel. Optional user filter.
 - `/userinfo user?:<user>`: Shows live Discord profile and server membership info.
 - `/serverinfo`: Shows live Discord server metadata.
 - `/roleinfo role:<role>`: Shows live Discord role metadata.
@@ -25,6 +28,18 @@ Setup validation:
 - Do not provide both `role` and `name` at the same time.
 - If a role already exists with the chosen name, bot reuses it (no duplicate role creation).
 - Bot syncs required staff permissions onto selected/reused/created roles before saving configuration.
+
+Purge behavior notes:
+
+- Amount must be between 1 and 100.
+- Old messages may be skipped by Discord bulk delete limits.
+- If no messages are deleted, command returns a clear message.
+
+Mute behavior notes:
+
+- Target must currently be in a voice channel.
+- Requires both moderator and bot to have Discord `Mute Members`.
+- Target must be below both moderator and bot role hierarchy (owner bypass applies only to moderator-vs-target check).
 
 ## Planned MVP Commands
 

@@ -43,3 +43,21 @@ Command handlers should call services, and services should call repositories.
   - `srmod_role_id`
   - `mod_role_id`
   - `log_channel_id`
+
+## Implemented Moderation Writes
+
+`/purge` currently writes:
+
+- `moderation_cases` with `action='purge'`
+- `purge_logs` summary rows
+
+It does not persist each individual deleted message.
+
+`/mute` currently writes:
+
+- `moderation_cases` with `action='mute'`
+- `active_mutes` upsert rows for active mute state (voice mutes persist with `expires_at = null`)
+
+`/kick` currently writes:
+
+- `moderation_cases` with `action='kick'`

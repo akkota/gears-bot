@@ -84,6 +84,7 @@ Default names:
 - `/set-admin-role` reuses/creates `Admin` with `Administrator`
 - `/set-srmod-role` reuses/creates `SrMod` with:
   - `ModerateMembers`
+  - `MuteMembers`
   - `ManageMessages`
   - `KickMembers`
   - `BanMembers`
@@ -99,6 +100,6 @@ Permission syncing behavior:
 
 Command intent mapping for moderation levels:
 
-- Mod should handle bot commands such as `/warn`, `/mute`, `/purge`
-- SrMod should handle Mod actions plus `/kick`, `/ban`
+- Mod should handle bot commands such as `/warn`, `/purge`
+- SrMod should handle Mod actions plus `/mute`, `/kick`, `/ban`
 - Admin should handle SrMod actions plus setup/admin commands

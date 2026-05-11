@@ -22,6 +22,9 @@ Configured role IDs are stored in `guild_settings`.
 - `/set-mod-role`: Server owner or configured Admin role
 - `/unset-mod-role`: Server owner or configured Admin role
 - `/set-log-channel`: Server owner or configured Admin role
+- `/kick`: SrMod+ and Discord `Kick Members`
+- `/mute`: SrMod+ and Discord `Mute Members`
+- `/purge`: Mod+ and Discord `Manage Messages`
 - `/userinfo`: Everyone
 - `/serverinfo`: Everyone
 - `/roleinfo`: Everyone
@@ -33,7 +36,7 @@ Future command permissions follow the project’s MVP matrix and will be documen
 When setup commands omit a role, bot reuses/creates:
 
 - `Admin` (Administrator permission)
-- `SrMod` (Moderate Members, Manage Messages, Kick Members, Ban Members)
+- `SrMod` (Moderate Members, Mute Members, Manage Messages, Kick Members, Ban Members)
 - `Mod` (Moderate Members, Manage Messages)
 
 Setup command input behavior:
@@ -45,13 +48,13 @@ Setup command input behavior:
 
 ## Intended Command Capabilities
 
-- Mod: `/warn`, `/mute`, `/purge`
-- SrMod: Mod actions plus `/kick`, `/ban`
+- Mod: `/warn`, `/purge`
+- SrMod: Mod actions plus `/mute`, `/kick`, `/ban`
 - Admin: SrMod actions plus setup/admin commands
 
 Native Discord permission requirements (in addition to bot-level role checks):
 
-- `/mute`: requires Discord `Moderate Members`
+- `/mute`: requires Discord `Mute Members`
 - `/purge`: requires Discord `Manage Messages`
 - `/kick`: requires Discord `Kick Members`
 - `/ban`: requires Discord `Ban Members`

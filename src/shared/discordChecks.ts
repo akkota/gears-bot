@@ -1,4 +1,5 @@
 import {
+  type MessageCreateOptions,
   type ChatInputCommandInteraction,
   type Guild,
   type GuildBasedChannel,
@@ -77,7 +78,9 @@ export async function fetchGuildChannel(
 
 export function isSendableTextChannel(
   channel: GuildBasedChannel | null,
-): channel is GuildBasedChannel & { send: (content: string) => Promise<unknown> } {
+): channel is GuildBasedChannel & {
+  send: (options: string | MessageCreateOptions) => Promise<unknown>;
+} {
   return Boolean(channel && channel.isTextBased() && "send" in channel);
 }
 
