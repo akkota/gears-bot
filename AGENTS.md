@@ -64,3 +64,10 @@ Only implement these commands unless explicitly asked otherwise:
 /define
 /suggest
 /reaction-role
+```
+
+## Permission Rules
+
+- `/set-admin-role`: Server owner only
+- `/set-srmod-role`: Discord Administrator only
+- `/set-mod-role`: Discord Administrator only
