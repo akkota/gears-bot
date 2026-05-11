@@ -1,0 +1,39 @@
+{
+  "name": "Gears",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/src/index.js",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "prettier --write .",
+    "register:guild": "tsx scripts/register-guild-commands.ts",
+    "register:global": "tsx scripts/register-global-commands.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.19.0",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.105.4",
+    "chrono-node": "^2.9.1",
+    "discord.js": "^14.26.4",
+    "dotenv": "^17.4.2",
+    "mathjs": "^15.2.0",
+    "ms": "^2.1.3",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "eslint": "^10.3.0",
+    "prettier": "^3.8.3",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.6"
+  },
+  "type": "module"
+}
