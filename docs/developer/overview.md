@@ -33,8 +33,10 @@ Current implemented bootstrap features:
   - `/kick`
   - `/mute`
   - `/purge`
+  - `/reaction-role`
   - `/remind`
   - `/timestamp`
+  - `/define`
   - `/timezone`
   - `/userinfo`
   - `/serverinfo`
@@ -87,7 +89,9 @@ Current implementation status:
 - `/massban` is implemented with admin-level bot permission checks, native Discord Ban Members checks, per-target hierarchy enforcement where role data exists, and persistence to `moderation_cases` + `moderation_case_targets`.
 - `/kick` is implemented with srmod-level bot permission checks, native Discord Kick Members checks, shared hierarchy checks, and moderation case persistence (`moderation_cases`).
 - `/purge` is implemented with mod-level bot permission checks, native Discord Manage Messages checks, and summary-only persistence (`moderation_cases` + `purge_logs`).
+- `/reaction-role` supports button-based panels with persisted panel/option mappings and role-toggle handling via button interactions.
 - `/remind` is implemented with relative-time parsing, Supabase persistence (`reminders`), and a periodic worker that sends due reminders and marks them completed.
 - `/timestamp` is stateless and returns Discord timestamp formats from parsed datetime input without database writes.
+- `/define` is stateless, uses a dictionary provider abstraction, and handles missing words/API errors without database writes.
 - `/timezone` provides timezone set/view/convert/guild-default flows using `user_timezones` plus `guild_settings.default_timezone` fallback.
 - Info commands are stateless, use live Discord data, and perform no database writes.

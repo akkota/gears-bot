@@ -25,8 +25,10 @@ Implemented commands currently:
 - `/kick`
 - `/mute`
 - `/purge`
+- `/reaction-role`
 - `/remind`
 - `/timestamp`
+- `/define`
 - `/timezone`
 - `/userinfo`
 - `/serverinfo`
@@ -98,6 +100,15 @@ Massban command behavior:
 - Persists per-target success/failure rows into `moderation_case_targets`.
 - Sends a summary log embed to configured log channel when available.
 
+Reaction role command behavior:
+
+- `/reaction-role` requires bot-level `admin`.
+- Uses `reaction_role_messages` and `reaction_role_options` repository-backed persistence.
+- `create` posts a button panel message and stores panel metadata.
+- `add-option` adds role mappings and updates panel buttons.
+- Button interactions toggle roles for users and validate bot `ManageRoles` + hierarchy before assignment.
+- Handles missing/deleted panel messages and roles gracefully.
+
 Remind command behavior:
 
 - `/remind` requires bot-level `everyone` and no native Discord permission.
@@ -111,6 +122,14 @@ Timestamp command behavior:
 - `/timestamp` requires bot-level `everyone` and no native Discord permission.
 - Parses datetime input (ISO or `YYYY-MM-DD HH:mm[:ss]`), with optional IANA timezone support.
 - Returns Discord timestamp outputs (`:t`, `:F`, `:R`) and raw epoch seconds.
+- Does not perform any database writes.
+
+Define command behavior:
+
+- `/define` requires bot-level `everyone` and no native Discord permission.
+- Uses a small dictionary provider abstraction backed by a dictionary HTTP API.
+- Handles missing words with a clear not-found response.
+- Handles network/API failures gracefully with a retry-later style response.
 - Does not perform any database writes.
 
 Timezone command behavior:

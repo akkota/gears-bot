@@ -11,6 +11,8 @@ import { kickCommand } from "../modules/moderation/commands/kick.js";
 import { massbanCommand } from "../modules/moderation/commands/massban.js";
 import { muteCommand } from "../modules/moderation/commands/mute.js";
 import { purgeCommand } from "../modules/moderation/commands/purge.js";
+import { reactionRoleCommand } from "../modules/reactionRoles/commands/reactionRole.js";
+import { defineCommand } from "../modules/utility/commands/define.js";
 import { pingCommand } from "../modules/utility/commands/ping.js";
 import { remindCommand } from "../modules/utility/commands/remind.js";
 import { roleinfoCommand } from "../modules/utility/commands/roleinfo.js";
@@ -34,6 +36,8 @@ export const registeredCommands: SlashCommand[] = [
   kickCommand,
   muteCommand,
   purgeCommand,
+  reactionRoleCommand,
+  defineCommand,
   remindCommand,
   timestampCommand,
   timezoneCommand,

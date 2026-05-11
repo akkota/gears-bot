@@ -371,6 +371,48 @@ Common errors:
 - `Messages older than 14 days cannot be bulk deleted.`
 - Missing `Manage Messages` permission.
 
+## `/reaction-role`
+Purpose:
+- Let admins create clickable role panels where users can self-assign roles.
+
+Who can use it:
+- Admin and above for setup commands.
+- Everyone can click panel buttons to toggle roles.
+
+Example:
+- `/reaction-role create channel:#roles title:Choose Roles description:Pick your tags`
+- `/reaction-role add-option message_id:123456789012345678 role:@Announcements label:Announcements emoji:📢`
+
+Inputs:
+- `create` subcommand:
+- `channel` (required): where panel message should be posted.
+- `title` (required): panel title.
+- `description` (optional): panel description text.
+- `add-option` subcommand:
+- `message_id` (required): panel message ID returned by `create`.
+- `role` (required): role users will get/remove when clicking.
+- `label` (required): button label shown to users.
+- `emoji` (optional): button emoji.
+- `description` (optional): internal option note for storage/use.
+
+What happens:
+- Admin creates a panel message first.
+- Admin adds one or more role options to that panel.
+- Users click buttons to toggle each mapped role on/off.
+- Mappings are stored so they still work after bot restarts.
+
+Example success response:
+- `Reaction role panel created in #roles. Message ID: ...`
+- `Added role option @Announcements to panel message ...`
+- User click result: `Added role @Announcements.` or `Removed role @Announcements.`
+
+Common errors:
+- `No active reaction role panel found for that message ID.`: wrong message ID or inactive panel.
+- `Panel message no longer exists. The panel was deactivated.`: panel message was deleted.
+- `I need the Discord Manage Roles permission...`: bot lacks required native permission.
+- `I cannot manage that role...`: target role is above/equal to bot’s highest role.
+- `That role no longer exists...`: mapped role was deleted.
+
 ## `/remind`
 Purpose:
 - Set a reminder in this server channel.
@@ -425,6 +467,32 @@ Example success response:
 Common errors:
 - Invalid datetime format.
 - Invalid timezone name.
+
+## `/define`
+Purpose:
+- Look up the meaning of a word.
+
+Who can use it:
+- Everyone.
+
+Example:
+- `/define word:resilient`
+- `/define word:community`
+
+Inputs:
+- `word` (required): the word you want defined.
+
+What happens:
+- Bot queries a dictionary provider.
+- Bot returns the top definitions (and example usage when available).
+
+Example success response:
+- `Word: resilient`
+- `1. Able to recover quickly from difficulties. (adjective)`
+
+Common errors:
+- `No definition found for ...`: word was not found in the dictionary source.
+- `Dictionary service is temporarily unavailable...`: dictionary API/network issue; retry shortly.
 
 ## `/timezone set`
 Purpose:

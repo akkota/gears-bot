@@ -80,3 +80,8 @@ It does not persist each individual deleted message.
 
 - `user_timezones` upsert rows (`guild_id`, `user_id`, `timezone`)
 - `guild_settings.default_timezone` for guild default timezone updates
+
+`/reaction-role` currently writes:
+
+- `reaction_role_messages` panel rows (`guild_id`, `channel_id`, `message_id`, mode `button`)
+- `reaction_role_options` role mapping rows for each button option

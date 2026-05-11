@@ -42,8 +42,10 @@ When moderating members:
 - `/ban`: SrMod+ and Discord `Ban Members`
 - `/massban`: Admin+ and Discord `Ban Members`
 - `/purge`: Mod+ and Discord `Manage Messages`
+- `/reaction-role`: Admin+ (bot-level) and bot needs Discord `Manage Roles`
 - `/remind`: everyone
 - `/timestamp`: everyone
+- `/define`: everyone
 - `/timezone set`: everyone
 - `/timezone view`: everyone
 - `/timezone convert`: everyone
