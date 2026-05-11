@@ -11,8 +11,11 @@ import { massbanCommand } from "../modules/moderation/commands/massban.js";
 import { muteCommand } from "../modules/moderation/commands/mute.js";
 import { purgeCommand } from "../modules/moderation/commands/purge.js";
 import { pingCommand } from "../modules/utility/commands/ping.js";
+import { remindCommand } from "../modules/utility/commands/remind.js";
 import { roleinfoCommand } from "../modules/utility/commands/roleinfo.js";
 import { serverinfoCommand } from "../modules/utility/commands/serverinfo.js";
+import { timezoneCommand } from "../modules/utility/commands/timezone.js";
+import { timestampCommand } from "../modules/utility/commands/timestamp.js";
 import { userinfoCommand } from "../modules/utility/commands/userinfo.js";
 import type { SlashCommand } from "../shared/command.js";
 
@@ -30,6 +33,9 @@ export const registeredCommands: SlashCommand[] = [
   kickCommand,
   muteCommand,
   purgeCommand,
+  remindCommand,
+  timestampCommand,
+  timezoneCommand,
   userinfoCommand,
   serverinfoCommand,
   roleinfoCommand,

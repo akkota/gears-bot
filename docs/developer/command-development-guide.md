@@ -25,6 +25,9 @@ Implemented commands currently:
 - `/kick`
 - `/mute`
 - `/purge`
+- `/remind`
+- `/timestamp`
+- `/timezone`
 - `/userinfo`
 - `/serverinfo`
 - `/roleinfo`
@@ -94,6 +97,30 @@ Massban command behavior:
 - For non-guild IDs, skips actor-vs-target hierarchy because role data is unavailable.
 - Persists per-target success/failure rows into `moderation_case_targets`.
 - Sends a summary log embed to configured log channel when available.
+
+Remind command behavior:
+
+- `/remind` requires bot-level `everyone` and no native Discord permission.
+- Parses relative time input (`m`, `h`, `d`) and stores reminder data in `reminders`.
+- Replies ephemerally with the scheduled reminder time.
+- A background worker polls due reminders, posts to the original channel, and marks reminders completed.
+- Missing/deleted channels are handled gracefully; worker does not crash.
+
+Timestamp command behavior:
+
+- `/timestamp` requires bot-level `everyone` and no native Discord permission.
+- Parses datetime input (ISO or `YYYY-MM-DD HH:mm[:ss]`), with optional IANA timezone support.
+- Returns Discord timestamp outputs (`:t`, `:F`, `:R`) and raw epoch seconds.
+- Does not perform any database writes.
+
+Timezone command behavior:
+
+- `/timezone set`, `/timezone view`, `/timezone convert` are available to everyone.
+- `/timezone guild-default` requires bot-level `admin`.
+- Validates IANA timezone names.
+- Persists user timezone per guild in `user_timezones`.
+- Persists guild default timezone in `guild_settings.default_timezone`.
+- Uses user timezone when available and guild default timezone as fallback during conversion/view flows.
 
 ## Pattern For Future Commands
 

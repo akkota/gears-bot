@@ -43,6 +43,7 @@ Command handlers should call services, and services should call repositories.
   - `srmod_role_id`
   - `mod_role_id`
   - `log_channel_id`
+  - `default_timezone`
 
 ## Implemented Moderation Writes
 
@@ -70,3 +71,12 @@ It does not persist each individual deleted message.
 
 - `moderation_cases` with `action='massban'`
 - `moderation_case_targets` rows for per-target success/failure outcomes
+
+`/remind` currently writes:
+
+- `reminders` rows with `completed=false` until the reminder worker delivers and marks completion
+
+`/timezone` currently writes:
+
+- `user_timezones` upsert rows (`guild_id`, `user_id`, `timezone`)
+- `guild_settings.default_timezone` for guild default timezone updates

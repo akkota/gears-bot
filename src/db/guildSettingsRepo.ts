@@ -13,6 +13,7 @@ export interface GuildSettings {
   srmodRoleId: string | null;
   modRoleId: string | null;
   logChannelId: string | null;
+  defaultTimezone: string | null;
 }
 
 export interface GuildSettingsUpdate {
@@ -20,6 +21,7 @@ export interface GuildSettingsUpdate {
   srmodRoleId?: string | null;
   modRoleId?: string | null;
   logChannelId?: string | null;
+  defaultTimezone?: string | null;
 }
 
 interface GuildSettingsRow {
@@ -28,10 +30,11 @@ interface GuildSettingsRow {
   srmod_role_id: string | null;
   mod_role_id: string | null;
   log_channel_id: string | null;
+  default_timezone: string | null;
 }
 
 const SELECT_COLUMNS =
-  "guild_id,admin_role_id,srmod_role_id,mod_role_id,log_channel_id";
+  "guild_id,admin_role_id,srmod_role_id,mod_role_id,log_channel_id,default_timezone";
 
 function mapGuildSettingsRow(row: GuildSettingsRow): GuildSettings {
   return {
@@ -40,6 +43,7 @@ function mapGuildSettingsRow(row: GuildSettingsRow): GuildSettings {
     srmodRoleId: row.srmod_role_id,
     modRoleId: row.mod_role_id,
     logChannelId: row.log_channel_id,
+    defaultTimezone: row.default_timezone,
   };
 }
 
@@ -117,6 +121,10 @@ function toDbUpdatePayload(update: GuildSettingsUpdate): Record<string, string |
 
   if (Object.hasOwn(update, "logChannelId")) {
     payload.log_channel_id = update.logChannelId ?? null;
+  }
+
+  if (Object.hasOwn(update, "defaultTimezone")) {
+    payload.default_timezone = update.defaultTimezone ?? null;
   }
 
   return payload;
