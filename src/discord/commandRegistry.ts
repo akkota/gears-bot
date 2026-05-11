@@ -1,3 +1,4 @@
+import { reactionRoleCommand } from "../modules/reactionRole/commands/reactionRole.js";
 import { setAdminRoleCommand } from "../modules/admin/commands/setAdminRole.js";
 import { setLogChannelCommand } from "../modules/admin/commands/setLogChannel.js";
 import { setModRoleCommand } from "../modules/admin/commands/setModRole.js";
@@ -39,6 +40,7 @@ export const registeredCommands: SlashCommand[] = [
   userinfoCommand,
   serverinfoCommand,
   roleinfoCommand,
+  reactionRoleCommand,
 ];
 
 export const commandMap = new Map(
