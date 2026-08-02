@@ -1,15 +1,12 @@
 import { ChannelType, MessageFlags, Role, SlashCommandBuilder } from "discord.js";
 import { requirePermission } from "../../../shared/permissions.js";
 import type { SlashCommand } from "../../../shared/command.js";
+import { parseMessageId } from "../services/parseMessageId.js";
 import {
   addReactionRolePanelOption,
   createReactionRolePanel,
   ReactionRoleSetupError,
 } from "../services/reactionRoleService.js";
-
-function isSnowflakeLike(value: string): boolean {
-  return /^\d{17,20}$/.test(value.trim());
-}
 
 export const reactionRoleCommand: SlashCommand = {
   data: new SlashCommandBuilder()
@@ -48,9 +45,12 @@ export const reactionRoleCommand: SlashCommand = {
         .addStringOption((option) =>
           option
             .setName("message_id")
-            .setDescription("Panel message ID returned by /reaction-role create.")
-            .setRequired(true)
-            .setMaxLength(25),
+            .setDescription(
+              "Panel message ID or message link from /reaction-role create.",
+            )
+            // No setMaxLength: Discord enforces it in the client. A cap of 25
+            // blocked snowflakes/links ("Must be 25 characters or fewer").
+            .setRequired(true),
         )
         .addRoleOption((option) =>
           option
@@ -116,10 +116,11 @@ export const reactionRoleCommand: SlashCommand = {
       }
 
       const messageIdRaw = interaction.options.getString("message_id", true);
-      const messageId = messageIdRaw.trim();
-      if (!isSnowflakeLike(messageId)) {
+      const messageId = parseMessageId(messageIdRaw);
+      if (!messageId) {
         await interaction.editReply({
-          content: "Provide a valid panel message ID.",
+          content:
+            "Provide a valid panel message ID or Discord message link. Message IDs are long numbers (17+ digits) — use the ID returned by `/reaction-role create`, or right-click the panel → Copy Message ID / Copy Message Link.",
         });
         return;
       }
