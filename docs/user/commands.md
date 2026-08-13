@@ -795,6 +795,67 @@ What happens:
 - The highest qualifying rank is the member's current role. Lower ladder roles are removed. Unrelated Discord roles are left alone.
 - Chat XP (25 XP / message, 30s cooldown) uses this same ladder.
 
+## `/welcome`
+Purpose:
+- Send a message when someone joins, and when someone boosts.
+
+Who can use it:
+- Server owner or configured Admin.
+
+Example:
+- `/welcome set channel:#welcome message:Welcome {user} to {server}!`
+- `/welcome boost channel:#announcements`
+- `/welcome show`
+
+What happens:
+- Templates can use `{user}`, `{server}`, `{memberCount}`, and `{boosts}`.
+- Requires Server Members Intent in the Discord Developer Portal.
+
+## `/repeat`
+Purpose:
+- Post the same message on a timer.
+
+Who can use it:
+- Server owner or configured Admin.
+
+Example:
+- `/repeat add channel:#rules interval:1d message:Please read the rules.`
+- `/repeat list`
+- `/repeat remove id:...`
+
+What happens:
+- First post is after one interval. Shortest interval is 1 minute (`10m`, `1h`, `1d`).
+
+## `/autorespond`
+Purpose:
+- Auto-reply when a message contains a trigger phrase.
+
+Who can use it:
+- Server owner or configured Admin.
+
+Example:
+- `/autorespond add trigger:office hours reply:Office hours are posted in #announcements.`
+- `/autorespond list`
+- `/autorespond remove trigger:office hours`
+
+What happens:
+- Match is case-insensitive. The longest matching trigger wins. Bots are ignored. Same trigger waits 8 seconds before firing again.
+- Requires Message Content Intent in the Discord Developer Portal.
+
+## `/embed`
+Purpose:
+- Create or edit a bot-authored embed.
+
+Who can use it:
+- Server owner or configured Admin.
+
+Example:
+- `/embed create title:Welcome description:Read the rules. color:#7c3aed`
+- `/embed edit message_id:123... title:Updated title`
+
+What happens:
+- Edit only works on embeds created with `/embed create` (message id or message link).
+
 ## Moderation Policy Note
 - Team policy: 3 warnings should trigger a 1-day mute.
 - Current status: `/warn` is not implemented yet in this build, so this policy is not automated yet.

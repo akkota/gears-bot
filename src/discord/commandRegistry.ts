@@ -14,6 +14,10 @@ import { muteCommand } from "../modules/moderation/commands/mute.js";
 import { purgeCommand } from "../modules/moderation/commands/purge.js";
 import { projectCommand } from "../modules/projects/commands/project.js";
 import { reactionRoleCommand } from "../modules/reactionRoles/commands/reactionRole.js";
+import { autorespondCommand } from "../modules/server/commands/autorespond.js";
+import { embedCommand } from "../modules/server/commands/embed.js";
+import { repeatCommand } from "../modules/server/commands/repeat.js";
+import { welcomeCommand } from "../modules/server/commands/welcome.js";
 import { setSocialChannelCommand } from "../modules/social/commands/setSocialChannel.js";
 import { defineCommand } from "../modules/utility/commands/define.js";
 import { pingCommand } from "../modules/utility/commands/ping.js";
@@ -61,6 +65,10 @@ export const registeredCommands: SlashCommand[] = [
   givexpCommand,
   setxpCommand,
   levelRoleCommand,
+  welcomeCommand,
+  repeatCommand,
+  autorespondCommand,
+  embedCommand,
 ];
 
 export const commandMap = new Map(

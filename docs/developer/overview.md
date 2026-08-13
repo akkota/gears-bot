@@ -43,6 +43,10 @@ Current implemented bootstrap features:
   - `/givexp`
   - `/setxp`
   - `/level-role`
+  - `/welcome`
+  - `/repeat`
+  - `/autorespond`
+  - `/embed`
   - `/remind`
   - `/timestamp`
   - `/define`
@@ -112,3 +116,7 @@ Current implementation status:
 - `/xp` shows XP total, level, rank, and progress to the next level.
 - Chat messages award 25 XP (30s cooldown). `/givexp` and `/setxp` use the same award path so skipped ranks still unlock.
 - `/level-role` lets admins set name + required level. Discord roles are created from the name at the bottom of the hierarchy unless an existing role is passed. Highest qualifying rank is synced; lower ladder roles are removed.
+- `/welcome` stores join and boost message templates (`{user}`, `{server}`, `{memberCount}`, `{boosts}`).
+- `/repeat` posts a message on an interval (minimum 1 minute).
+- `/autorespond` replies when a guild message contains a trigger (8s cooldown, bots ignored).
+- `/embed create` / `/embed edit` posts and updates bot-authored embeds.

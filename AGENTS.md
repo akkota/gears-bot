@@ -18,6 +18,7 @@ The current MVP includes:
 - Google Calendar → Discord events
 - Instagram/LinkedIn auto-posts
 - XP / levels and customizable level-up roles
+- Welcome / boost messages, repeating messages, autoresponder, embed maker
 
 Future modules may include:
 
@@ -76,6 +77,10 @@ Only implement these commands unless explicitly asked otherwise:
 /givexp
 /setxp
 /level-role
+/welcome
+/repeat
+/autorespond
+/embed
 ```
 
 ## Permission Rules

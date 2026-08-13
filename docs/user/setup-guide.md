@@ -7,6 +7,7 @@ If you follow this in order, you can fully set up the current bot features.
 ## 1. What You Need Before Starting
 - A Discord server where you have owner/admin control.
 - A Discord bot application and bot token.
+- Privileged intents enabled in the Discord Developer Portal: **Server Members Intent** (welcome/boost) and **Message Content Intent** (autoresponder).
 - A Supabase project.
 - Node.js and `pnpm` installed on your computer.
 
@@ -116,6 +117,10 @@ After setup, test these commands in a safe test server:
 - `/xp`
 - `/level-role setup-defaults`
 - `/givexp`
+- `/welcome set`
+- `/repeat add`
+- `/autorespond add`
+- `/embed create`
 
 For `/ban` and `/massban` specifically:
 - Automated checks pass in development.
@@ -125,6 +130,9 @@ For `/ban` and `/massban` specifically:
 - Slash commands do not appear:
 - run `pnpm register:guild` again
 - confirm `DISCORD_GUILD_ID` is correct
+
+- Bot crashes with `Used disallowed intents`:
+- In the Discord Developer Portal, enable **Server Members Intent** and **Message Content Intent**, then restart `pnpm dev`
 
 - Bot says it cannot manage a role:
 - move bot role above staff roles in Discord role list

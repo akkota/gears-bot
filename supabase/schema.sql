@@ -623,3 +623,84 @@ create table if not exists level_roles (
 
 create index if not exists idx_level_roles_guild
   on level_roles(guild_id);
+
+
+-- =========================
+-- WELCOME / BOOST MESSAGES
+-- =========================
+
+create table if not exists welcome_settings (
+  guild_id text primary key references guilds(guild_id) on delete cascade,
+  welcome_channel_id text,
+  welcome_message text,
+  boost_channel_id text,
+  boost_message text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+
+-- =========================
+-- REPEATING MESSAGES
+-- =========================
+
+create table if not exists repeat_messages (
+  id uuid primary key default gen_random_uuid(),
+  guild_id text not null references guilds(guild_id) on delete cascade,
+  channel_id text not null,
+  content text not null,
+  interval_ms integer not null check (interval_ms >= 60000),
+  next_run_at timestamptz not null,
+  created_by text not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists idx_repeat_messages_next_run
+  on repeat_messages(next_run_at);
+
+create index if not exists idx_repeat_messages_guild
+  on repeat_messages(guild_id);
+
+
+-- =========================
+-- AUTORESPONSES
+-- =========================
+
+create table if not exists autoresponses (
+  id uuid primary key default gen_random_uuid(),
+  guild_id text not null references guilds(guild_id) on delete cascade,
+  trigger text not null,
+  reply text not null,
+  created_by text not null,
+  created_at timestamptz not null default now()
+);
+
+create unique index if not exists idx_autoresponses_guild_trigger
+  on autoresponses (guild_id, lower(trigger));
+
+create index if not exists idx_autoresponses_guild
+  on autoresponses(guild_id);
+
+
+-- =========================
+-- BOT-AUTHORED EMBEDS
+-- =========================
+
+create table if not exists bot_embeds (
+  id uuid primary key default gen_random_uuid(),
+  guild_id text not null references guilds(guild_id) on delete cascade,
+  channel_id text not null,
+  message_id text not null,
+  title text,
+  description text,
+  color integer,
+  image_url text,
+  created_by text not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique(guild_id, message_id)
+);
+
+create index if not exists idx_bot_embeds_guild
+  on bot_embeds(guild_id);

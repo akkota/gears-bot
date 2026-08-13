@@ -32,6 +32,10 @@ They are applied manually in Supabase.
 - `calendar_event_sync`
 - `user_xp`
 - `level_roles`
+- `welcome_settings`
+- `repeat_messages`
+- `autoresponses`
+- `bot_embeds`
 
 ## Repository Rule
 
@@ -113,3 +117,19 @@ Email/social/calendar workers currently write:
 `/level-role` currently writes:
 
 - `level_roles` rows (`guild_id`, `name`, `required_level`, `discord_role_id`)
+
+`/welcome` currently writes:
+
+- `welcome_settings` (`welcome_channel_id`, `welcome_message`, `boost_channel_id`, `boost_message`)
+
+`/repeat` currently writes:
+
+- `repeat_messages` (`channel_id`, `content`, `interval_ms`, `next_run_at`)
+
+`/autorespond` currently writes:
+
+- `autoresponses` (`trigger`, `reply`)
+
+`/embed` currently writes:
+
+- `bot_embeds` (`channel_id`, `message_id`, title/description/color/image)

@@ -16,6 +16,7 @@ pnpm build
 - `tests/projectSearch.test.ts`: Plan.io mapping, query matching, pagination custom ids.
 - `tests/eswIntegrations.test.ts`: email ignore rules, calendar mapping, social post mapping.
 - `tests/xpRanks.test.ts`: XP curve, rank selection, skip-multiple unlocks, max rank, `/rank` and `/xp` embeds.
+- `tests/serverOps.test.ts`: welcome templates, repeat intervals, autorespond matching/cooldown, embed color parsing.
 
 ## Notes
 

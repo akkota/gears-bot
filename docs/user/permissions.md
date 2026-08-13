@@ -62,6 +62,10 @@ When moderating members:
 - `/givexp`: SrMod+
 - `/setxp`: SrMod+
 - `/level-role`: server owner or configured Admin (bot needs Discord `Manage Roles` to assign/create rank roles)
+- `/welcome`: server owner or configured Admin
+- `/repeat`: server owner or configured Admin
+- `/autorespond`: server owner or configured Admin
+- `/embed`: server owner or configured Admin
 
 ## Staff Roles Created By Setup Commands
 If you run setup commands without selecting a role, the bot can reuse/create:

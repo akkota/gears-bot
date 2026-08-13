@@ -30,6 +30,10 @@ alter table email_messages_seen enable row level security;
 alter table calendar_event_sync enable row level security;
 alter table user_xp enable row level security;
 alter table level_roles enable row level security;
+alter table welcome_settings enable row level security;
+alter table repeat_messages enable row level security;
+alter table autoresponses enable row level security;
+alter table bot_embeds enable row level security;
 
 
 -- =========================
@@ -59,6 +63,10 @@ alter table email_messages_seen force row level security;
 alter table calendar_event_sync force row level security;
 alter table user_xp force row level security;
 alter table level_roles force row level security;
+alter table welcome_settings force row level security;
+alter table repeat_messages force row level security;
+alter table autoresponses force row level security;
+alter table bot_embeds force row level security;
 
 
 -- =========================
@@ -87,6 +95,10 @@ revoke all on table email_messages_seen from anon, authenticated;
 revoke all on table calendar_event_sync from anon, authenticated;
 revoke all on table user_xp from anon, authenticated;
 revoke all on table level_roles from anon, authenticated;
+revoke all on table welcome_settings from anon, authenticated;
+revoke all on table repeat_messages from anon, authenticated;
+revoke all on table autoresponses from anon, authenticated;
+revoke all on table bot_embeds from anon, authenticated;
 
 
 -- =========================

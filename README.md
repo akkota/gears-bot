@@ -13,6 +13,7 @@ Gears handles moderation, staff role configuration, reaction roles, reminders, t
 - **ESW projects** — searchable Plan.io project database with chapter summaries and page links
 - **Integrations** — Google Calendar → Discord events, list-email → Discord, Instagram/LinkedIn auto-posts
 - **XP / ranks** — chat XP, `/xp`, `/rank`, and a customizable level-up role ladder
+- **Server ops** — welcome/boost messages, repeating announcements, autoresponder, embed maker
 - **Permissions** — bot-level ranks layered with native Discord permissions
 
 ## Stack
@@ -36,6 +37,8 @@ pnpm dev               # start the bot
 Then in Discord, run `/ping` — you should get an ephemeral `Pong!`.
 
 Admins can seed XP ranks with `/level-role setup-defaults` (bot needs `Manage Roles` above those roles).
+
+Enable **Server Members Intent** and **Message Content Intent** in the Discord Developer Portal (welcome/boost + autoresponder).
 
 First-time server setup (in order):
 

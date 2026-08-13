@@ -42,6 +42,10 @@ Implemented commands currently:
 - `/givexp`
 - `/setxp`
 - `/level-role`
+- `/welcome`
+- `/repeat`
+- `/autorespond`
+- `/embed`
 
 `/ping` exists to verify:
 
@@ -162,10 +166,18 @@ XP / level-role behavior:
 
 - `/rank` is available to everyone and shows level, current rank, next-role progress, and Unlocked/Current/Locked.
 - `/xp` is available to everyone and shows XP total, level, rank, and progress to the next level.
-- Chat XP awards 25 XP per guild message with a 30s cooldown (`GuildMessages` intent; message text is not read).
+- Chat XP awards 25 XP per guild message with a 30s cooldown.
 - `/givexp` and `/setxp` require bot-level `srmod` and use the same award path as chat XP.
 - Crossing a rank (including skipped ranks) posts a short New Role Unlocked notice and syncs the highest qualifying Discord role.
 - `/level-role` requires server owner or configured Admin. Admins set name + required level; Discord role is optional and is created from the name (lowest hierarchy) if omitted. `/level-role setup-defaults` seeds Beginner→Master the same way.
+
+Server ops behavior:
+
+- `/welcome`, `/repeat`, `/autorespond`, and `/embed` require server owner or configured Admin.
+- Welcome/boost templates support `{user}`, `{server}`, `{memberCount}`, `{boosts}`.
+- Repeating messages use the same relative intervals as reminders (`10m`, `1h`, `1d`) with a 1-minute minimum.
+- Autoresponder matches case-insensitive substrings, prefers the longest trigger, ignores bots, and cools down 8s per rule.
+- `/embed edit` only updates messages created with `/embed create`.
 
 Timezone command behavior:
 
