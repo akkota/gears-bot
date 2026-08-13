@@ -34,6 +34,8 @@ function formatPermissions(role: Role): string {
 export function buildUserInfoEmbed(params: {
   user: User;
   member: GuildMember | null;
+  level?: number;
+  rankName?: string | null;
 }): EmbedBuilder {
   const { user, member } = params;
 
@@ -56,6 +58,16 @@ export function buildUserInfoEmbed(params: {
   }
 
   const nonEveryoneRoleCount = Math.max(member.roles.cache.size - 1, 0);
+  if (typeof params.level === "number") {
+    embed.addFields({
+      name: "Level",
+      value: params.rankName
+        ? `Level ${params.level} · ${params.rankName}`
+        : `Level ${params.level}`,
+      inline: true,
+    });
+  }
+
   embed.addFields(
     {
       name: "Display Name",

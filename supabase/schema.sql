@@ -583,3 +583,43 @@ create table if not exists calendar_event_sync (
 
 create index if not exists idx_calendar_event_sync_guild
   on calendar_event_sync(guild_id);
+
+
+-- =========================
+-- USER XP / LEVELS
+-- =========================
+-- Level 1 at 0 XP. XP to reach level L is 100 * (L - 1)^2.
+
+create table if not exists user_xp (
+  guild_id text not null references guilds(guild_id) on delete cascade,
+  user_id text not null,
+  xp integer not null default 0 check (xp >= 0),
+  last_message_xp_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  primary key (guild_id, user_id)
+);
+
+create index if not exists idx_user_xp_guild
+  on user_xp(guild_id);
+
+
+-- =========================
+-- LEVEL-UP ROLES
+-- =========================
+-- Customizable per-guild rank ladder. Highest qualifying role wins.
+
+create table if not exists level_roles (
+  id uuid primary key default gen_random_uuid(),
+  guild_id text not null references guilds(guild_id) on delete cascade,
+  name text not null,
+  required_level integer not null check (required_level >= 1),
+  discord_role_id text not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique(guild_id, required_level),
+  unique(guild_id, discord_role_id)
+);
+
+create index if not exists idx_level_roles_guild
+  on level_roles(guild_id);

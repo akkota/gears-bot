@@ -37,6 +37,10 @@ Implemented commands currently:
 - `/set-email-channel`
 - `/set-calendar`
 - `/set-social-channel`
+- `/rank`
+- `/givexp`
+- `/setxp`
+- `/level-role`
 
 `/ping` exists to verify:
 
@@ -152,6 +156,14 @@ Email/calendar/social setup behavior:
 - Email poller uses IMAP on a dedicated mailbox and ignores replies/bounces.
 - Calendar worker polls Google Calendar and upserts Discord scheduled events as External.
 - Social worker polls Instagram Graph API and LinkedIn org posts, with silent first-run import.
+
+XP / level-role behavior:
+
+- `/rank` is available to everyone and shows level, current rank, next-role progress, and Unlocked/Current/Locked.
+- Chat XP awards 15 XP per guild message with a 60s cooldown (`GuildMessages` intent; message text is not read).
+- `/givexp` and `/setxp` require bot-level `srmod` and use the same award path as chat XP.
+- Crossing a rank (including skipped ranks) posts a short New Role Unlocked notice and syncs the highest qualifying Discord role.
+- `/level-role` requires server owner or configured Admin. Admins set name + required level + Discord role, or seed Beginner→Master defaults.
 
 Timezone command behavior:
 

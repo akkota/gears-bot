@@ -17,13 +17,13 @@ The current MVP includes:
 - Email list → Discord
 - Google Calendar → Discord events
 - Instagram/LinkedIn auto-posts
+- XP / levels and customizable level-up roles
 
 Future modules may include:
 
 - Tickets/modmail
 - QOTW/topic system
 - Chapter updates
-- XP/economy
 - Analytics
 - Invite tracking
 - Anti-spam
@@ -71,6 +71,10 @@ Only implement these commands unless explicitly asked otherwise:
 /set-email-channel
 /set-calendar
 /set-social-channel
+/rank
+/givexp
+/setxp
+/level-role
 ```
 
 ## Permission Rules

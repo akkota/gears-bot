@@ -4,11 +4,15 @@ import { startEmailWorker } from "../modules/email/services/emailWorker.js";
 import { startProjectSyncWorker } from "../modules/projects/services/projectSyncWorker.js";
 import { startSocialWorker } from "../modules/social/services/socialWorker.js";
 import { startReminderWorker } from "../modules/utility/services/reminderWorker.js";
+import { handleGuildMessageXp } from "../modules/xp/services/messageXpListener.js";
 import { handleInteraction } from "./interactionHandler.js";
 
 export function createDiscordClient(): Client {
   const client = new Client({
-    intents: [GatewayIntentBits.Guilds],
+    intents: [
+      GatewayIntentBits.Guilds,
+      GatewayIntentBits.GuildMessages,
+    ],
   });
 
   client.once(Events.ClientReady, (readyClient) => {
@@ -22,6 +26,10 @@ export function createDiscordClient(): Client {
 
   client.on(Events.InteractionCreate, (interaction) => {
     void handleInteraction(interaction);
+  });
+
+  client.on(Events.MessageCreate, (message) => {
+    void handleGuildMessageXp(message);
   });
 
   return client;

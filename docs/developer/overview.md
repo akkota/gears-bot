@@ -33,22 +33,22 @@ Current implemented bootstrap features:
   - `/kick`
   - `/mute`
   - `/purge`
-- `/reaction-role`
-- `/project`
-- `/set-email-channel`
-- `/set-calendar`
-- `/set-social-channel`
-- `/remind`
+  - `/reaction-role`
+  - `/project`
+  - `/set-email-channel`
+  - `/set-calendar`
+  - `/set-social-channel`
+  - `/rank`
+  - `/givexp`
+  - `/setxp`
+  - `/level-role`
+  - `/remind`
   - `/timestamp`
   - `/define`
   - `/timezone`
   - `/userinfo`
   - `/serverinfo`
   - `/roleinfo`
-  - `/project`
-  - `/set-email-channel`
-  - `/set-calendar`
-  - `/set-social-channel`
 
 ## Architecture Rules
 
@@ -107,3 +107,6 @@ Current implementation status:
 - `/set-email-channel` stores the destination for a dedicated-mailbox IMAP poller that posts new list emails.
 - `/set-calendar` stores a Google Calendar ID; a worker creates/updates Discord scheduled events.
 - `/set-social-channel` stores the destination for Instagram Graph API and LinkedIn org post polling. First poll imports existing posts silently.
+- `/rank` shows XP level, current customizable rank, next-role progress, and Unlocked/Current/Locked.
+- Chat messages award 15 XP (60s cooldown). `/givexp` and `/setxp` use the same award path so skipped ranks still unlock.
+- `/level-role` lets admins set name + required level + Discord role. Highest qualifying rank is synced; lower ladder roles are removed.

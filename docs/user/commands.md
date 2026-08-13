@@ -732,6 +732,53 @@ Example:
 What happens:
 - Bot stores the channel. Configured Instagram/LinkedIn accounts are polled; new posts are announced with a link. Existing posts are imported silently on first run.
 
+## `/rank`
+Purpose:
+- Show a member's level, current rank, and progress toward the next role.
+
+Who can use it:
+- Everyone.
+
+Example:
+- `/rank`
+- `/rank user:@Ada`
+
+What happens:
+- Bot shows Level + current rank, XP, a progress bar to the next configured role, and Unlocked / Current / Locked for the whole ladder.
+- If no custom ranks exist yet, the default Beginner → Master ladder is used for display only.
+
+## `/givexp` / `/setxp`
+Purpose:
+- Staff tools to add or set XP.
+
+Who can use it:
+- SrMod and above.
+
+Example:
+- `/givexp user:@Ada amount:500`
+- `/setxp user:@Ada amount:1600`
+
+What happens:
+- XP updates through the same path as chat XP, so skipped ranks still unlock and Discord roles stay in sync.
+- A New Role Unlocked message is included when a rank threshold is crossed.
+
+## `/level-role`
+Purpose:
+- Customize the rank ladder (name, required level, Discord role).
+
+Who can use it:
+- Server owner or configured Admin.
+
+Example:
+- `/level-role setup-defaults`
+- `/level-role add name:Rising level:5 role:@Rising`
+- `/level-role list`
+- `/level-role remove level:5`
+
+What happens:
+- The highest qualifying rank is the member's current role. Lower ladder roles are removed. Unrelated Discord roles are left alone.
+- Chat XP (15 XP / message, 60s cooldown) uses this same ladder.
+
 ## Moderation Policy Note
 - Team policy: 3 warnings should trigger a 1-day mute.
 - Current status: `/warn` is not implemented yet in this build, so this policy is not automated yet.

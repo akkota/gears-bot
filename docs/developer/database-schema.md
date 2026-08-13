@@ -30,6 +30,8 @@ They are applied manually in Supabase.
 - `social_posts_seen`
 - `email_messages_seen`
 - `calendar_event_sync`
+- `user_xp`
+- `level_roles`
 
 ## Repository Rule
 
@@ -103,3 +105,11 @@ Email/social/calendar workers currently write:
 - `email_messages_seen` by `Message-ID`
 - `social_posts_seen` by platform + external id
 - `calendar_event_sync` mapping Google event ids to Discord scheduled event ids
+
+`/rank`, `/givexp`, `/setxp`, and chat XP currently write:
+
+- `user_xp` rows (`guild_id`, `user_id`, `xp`, `last_message_xp_at`)
+
+`/level-role` currently writes:
+
+- `level_roles` rows (`guild_id`, `name`, `required_level`, `discord_role_id`)

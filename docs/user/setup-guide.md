@@ -48,6 +48,10 @@ Quick health check:
 - In Discord, run `/ping`.
 - Expected reply: `Pong!` (private/ephemeral).
 
+XP ranks:
+- Run `/level-role setup-defaults` so chat XP can assign Discord roles.
+- Bot role must sit above those rank roles (`Manage Roles` required).
+
 ## 4. First-Time Server Configuration
 Run these setup commands in this order:
 1. `/set-admin-role`
@@ -108,6 +112,9 @@ After setup, test these commands in a safe test server:
 - `/set-email-channel`
 - `/set-calendar`
 - `/set-social-channel`
+- `/rank`
+- `/level-role setup-defaults`
+- `/givexp`
 
 For `/ban` and `/massban` specifically:
 - Automated checks pass in development.

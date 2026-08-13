@@ -57,6 +57,10 @@ When moderating members:
 - `/set-email-channel`: server owner or configured Admin
 - `/set-calendar`: server owner or configured Admin
 - `/set-social-channel`: server owner or configured Admin
+- `/rank`: everyone
+- `/givexp`: SrMod+
+- `/setxp`: SrMod+
+- `/level-role`: server owner or configured Admin (bot needs Discord `Manage Roles` to assign/create rank roles)
 
 ## Staff Roles Created By Setup Commands
 If you run setup commands without selecting a role, the bot can reuse/create:
