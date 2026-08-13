@@ -1,5 +1,5 @@
 import { EmbedBuilder } from "discord.js";
-import { levelFromXp, xpForLevel } from "./levelMath.js";
+import { levelFromXp, xpForLevel, xpToNextLevel } from "./levelMath.js";
 import {
   getCurrentRank,
   getNextRank,
@@ -88,4 +88,27 @@ export function buildRankEmbed(params: {
   });
 
   return embed;
+}
+
+export function buildXpEmbed(params: {
+  displayName: string;
+  avatarUrl: string;
+  xp: number;
+  ranks: RankDefinition[];
+}): EmbedBuilder {
+  const level = levelFromXp(params.xp);
+  const current = getCurrentRank(level, params.ranks);
+  const next = xpToNextLevel(params.xp);
+  const span = Math.max(1, next.nextLevelXp - next.currentLevelXp);
+  const title = current ? `Level ${level} · ${current.name}` : `Level ${level}`;
+
+  return new EmbedBuilder()
+    .setColor(0x7c3aed)
+    .setTitle(`${params.xp.toLocaleString()} XP`)
+    .setThumbnail(params.avatarUrl)
+    .setDescription(`${params.displayName} — ${title}`)
+    .addFields({
+      name: "Next level",
+      value: `${progressBar(next.xpIntoLevel / span)} ${next.xpNeeded.toLocaleString()} XP to level ${level + 1}`,
+    });
 }

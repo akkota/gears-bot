@@ -10,7 +10,7 @@ import {
   resolveLadder,
 } from "../src/modules/xp/services/rankLadder.js";
 import { isOnMessageXpCooldown } from "../src/modules/xp/services/xpService.js";
-import { buildRankEmbed } from "../src/modules/xp/services/rankUi.js";
+import { buildRankEmbed, buildXpEmbed } from "../src/modules/xp/services/rankUi.js";
 
 describe("level formula", () => {
   it("starts at level 1 with 0 XP", () => {
@@ -127,5 +127,23 @@ describe("rank embed", () => {
     const json = embed.toJSON();
     expect(json.title).toContain("Master");
     expect(json.fields?.some((field) => field.value === "Highest role reached")).toBe(true);
+  });
+});
+
+describe("xp embed", () => {
+  it("shows XP total, level, and progress to the next level", () => {
+    const embed = buildXpEmbed({
+      displayName: "Ada",
+      avatarUrl: "https://example.com/a.png",
+      xp: xpForLevel(12),
+      ranks: DEFAULT_LEVEL_ROLES,
+    });
+    const json = embed.toJSON();
+    expect(json.title).toContain("XP");
+    expect(json.description).toContain("Level 12");
+    expect(json.description).toContain("Skilled");
+    expect(json.fields?.some((field) => field.name === "Next level" && field.value.includes("level 13"))).toBe(
+      true,
+    );
   });
 });

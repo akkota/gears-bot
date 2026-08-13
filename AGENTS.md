@@ -72,6 +72,7 @@ Only implement these commands unless explicitly asked otherwise:
 /set-calendar
 /set-social-channel
 /rank
+/xp
 /givexp
 /setxp
 /level-role

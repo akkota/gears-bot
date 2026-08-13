@@ -58,6 +58,7 @@ When moderating members:
 - `/set-calendar`: server owner or configured Admin
 - `/set-social-channel`: server owner or configured Admin
 - `/rank`: everyone
+- `/xp`: everyone
 - `/givexp`: SrMod+
 - `/setxp`: SrMod+
 - `/level-role`: server owner or configured Admin (bot needs Discord `Manage Roles` to assign/create rank roles)

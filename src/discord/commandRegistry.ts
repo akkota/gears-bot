@@ -27,6 +27,7 @@ import { givexpCommand } from "../modules/xp/commands/givexp.js";
 import { levelRoleCommand } from "../modules/xp/commands/levelRole.js";
 import { rankCommand } from "../modules/xp/commands/rank.js";
 import { setxpCommand } from "../modules/xp/commands/setxp.js";
+import { xpCommand } from "../modules/xp/commands/xp.js";
 import type { SlashCommand } from "../shared/command.js";
 
 export const registeredCommands: SlashCommand[] = [
@@ -56,6 +57,7 @@ export const registeredCommands: SlashCommand[] = [
   serverinfoCommand,
   roleinfoCommand,
   rankCommand,
+  xpCommand,
   givexpCommand,
   setxpCommand,
   levelRoleCommand,

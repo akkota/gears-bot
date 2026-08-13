@@ -38,6 +38,7 @@ Implemented commands currently:
 - `/set-calendar`
 - `/set-social-channel`
 - `/rank`
+- `/xp`
 - `/givexp`
 - `/setxp`
 - `/level-role`
@@ -160,6 +161,7 @@ Email/calendar/social setup behavior:
 XP / level-role behavior:
 
 - `/rank` is available to everyone and shows level, current rank, next-role progress, and Unlocked/Current/Locked.
+- `/xp` is available to everyone and shows XP total, level, rank, and progress to the next level.
 - Chat XP awards 15 XP per guild message with a 60s cooldown (`GuildMessages` intent; message text is not read).
 - `/givexp` and `/setxp` require bot-level `srmod` and use the same award path as chat XP.
 - Crossing a rank (including skipped ranks) posts a short New Role Unlocked notice and syncs the highest qualifying Discord role.

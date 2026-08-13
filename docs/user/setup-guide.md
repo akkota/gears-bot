@@ -113,6 +113,7 @@ After setup, test these commands in a safe test server:
 - `/set-calendar`
 - `/set-social-channel`
 - `/rank`
+- `/xp`
 - `/level-role setup-defaults`
 - `/givexp`
 

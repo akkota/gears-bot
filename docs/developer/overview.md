@@ -39,6 +39,7 @@ Current implemented bootstrap features:
   - `/set-calendar`
   - `/set-social-channel`
   - `/rank`
+  - `/xp`
   - `/givexp`
   - `/setxp`
   - `/level-role`
@@ -108,5 +109,6 @@ Current implementation status:
 - `/set-calendar` stores a Google Calendar ID; a worker creates/updates Discord scheduled events.
 - `/set-social-channel` stores the destination for Instagram Graph API and LinkedIn org post polling. First poll imports existing posts silently.
 - `/rank` shows XP level, current customizable rank, next-role progress, and Unlocked/Current/Locked.
+- `/xp` shows XP total, level, rank, and progress to the next level.
 - Chat messages award 15 XP (60s cooldown). `/givexp` and `/setxp` use the same award path so skipped ranks still unlock.
 - `/level-role` lets admins set name + required level. Discord roles are created from the name at the bottom of the hierarchy unless an existing role is passed. Highest qualifying rank is synced; lower ladder roles are removed.

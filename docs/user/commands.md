@@ -747,6 +747,20 @@ What happens:
 - Bot shows Level + current rank, XP, a progress bar to the next configured role, and Unlocked / Current / Locked for the whole ladder.
 - If no custom ranks exist yet, the default Beginner → Master ladder is used for display only.
 
+## `/xp`
+Purpose:
+- Check a member's XP total and level.
+
+Who can use it:
+- Everyone.
+
+Example:
+- `/xp`
+- `/xp user:@Ada`
+
+What happens:
+- Bot shows current XP, level, rank name, and progress to the next level.
+
 ## `/givexp` / `/setxp`
 Purpose:
 - Staff tools to add or set XP.
