@@ -89,9 +89,26 @@ create table if not exists guild_settings (
   suggestions_channel_id text,
   suggestions_review_channel_id text,
 
+  social_announce_channel_id text,
+  email_announce_channel_id text,
+  google_calendar_id text,
+  calendar_announce_channel_id text,
+
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table guild_settings
+  add column if not exists social_announce_channel_id text;
+
+alter table guild_settings
+  add column if not exists email_announce_channel_id text;
+
+alter table guild_settings
+  add column if not exists google_calendar_id text;
+
+alter table guild_settings
+  add column if not exists calendar_announce_channel_id text;
 
 create index if not exists idx_guild_settings_mod_role
   on guild_settings(mod_role_id);
@@ -484,3 +501,85 @@ create index if not exists idx_bot_audit_logs_event
 
 create index if not exists idx_bot_audit_logs_created_at
   on bot_audit_logs(created_at);
+
+
+-- =========================
+-- ESW PROJECTS (Plan.io cache)
+-- =========================
+-- Synced from https://eswprojects.plan.io/projects.json
+-- Supports /project search.
+
+create table if not exists esw_projects (
+  planio_id integer primary key,
+  identifier text not null unique,
+  name text not null,
+  chapter text not null default '',
+  status text not null default '',
+  project_type text not null default '',
+  summary text not null default '',
+  url text not null,
+  updated_on timestamptz,
+  synced_at timestamptz not null default now()
+);
+
+create index if not exists idx_esw_projects_name
+  on esw_projects(name);
+
+create index if not exists idx_esw_projects_chapter
+  on esw_projects(chapter);
+
+create index if not exists idx_esw_projects_status
+  on esw_projects(status);
+
+
+-- =========================
+-- SOCIAL POST DEDUPE
+-- =========================
+-- Tracks Instagram/LinkedIn posts already mirrored to Discord.
+
+create table if not exists social_posts_seen (
+  id uuid primary key default gen_random_uuid(),
+  platform text not null,
+  external_id text not null,
+  permalink text,
+  posted_at timestamptz,
+  created_at timestamptz not null default now(),
+  unique(platform, external_id)
+);
+
+create index if not exists idx_social_posts_seen_platform
+  on social_posts_seen(platform);
+
+
+-- =========================
+-- EMAIL MESSAGE DEDUPE
+-- =========================
+-- Tracks distribution-list emails already posted to Discord.
+
+create table if not exists email_messages_seen (
+  id uuid primary key default gen_random_uuid(),
+  message_id text not null unique,
+  subject text,
+  from_address text,
+  received_at timestamptz,
+  created_at timestamptz not null default now()
+);
+
+
+-- =========================
+-- GOOGLE CALENDAR ↔ DISCORD EVENTS
+-- =========================
+
+create table if not exists calendar_event_sync (
+  id uuid primary key default gen_random_uuid(),
+  guild_id text not null references guilds(guild_id) on delete cascade,
+  google_event_id text not null,
+  discord_event_id text,
+  etag text,
+  status text not null default 'scheduled',
+  updated_at timestamptz not null default now(),
+  unique(guild_id, google_event_id)
+);
+
+create index if not exists idx_calendar_event_sync_guild
+  on calendar_event_sync(guild_id);

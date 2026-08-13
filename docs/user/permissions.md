@@ -53,6 +53,10 @@ When moderating members:
 - `/userinfo`: everyone
 - `/serverinfo`: everyone
 - `/roleinfo`: everyone
+- `/project search`: everyone
+- `/set-email-channel`: server owner or configured Admin
+- `/set-calendar`: server owner or configured Admin
+- `/set-social-channel`: server owner or configured Admin
 
 ## Staff Roles Created By Setup Commands
 If you run setup commands without selecting a role, the bot can reuse/create:

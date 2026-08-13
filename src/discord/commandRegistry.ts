@@ -5,12 +5,16 @@ import { setSrmodRoleCommand } from "../modules/admin/commands/setSrmodRole.js";
 import { unsetAdminRoleCommand } from "../modules/admin/commands/unsetAdminRole.js";
 import { unsetModRoleCommand } from "../modules/admin/commands/unsetModRole.js";
 import { unsetSrmodRoleCommand } from "../modules/admin/commands/unsetSrmodRole.js";
+import { setCalendarCommand } from "../modules/calendar/commands/setCalendar.js";
+import { setEmailChannelCommand } from "../modules/email/commands/setEmailChannel.js";
 import { banCommand } from "../modules/moderation/commands/ban.js";
 import { kickCommand } from "../modules/moderation/commands/kick.js";
 import { massbanCommand } from "../modules/moderation/commands/massban.js";
 import { muteCommand } from "../modules/moderation/commands/mute.js";
 import { purgeCommand } from "../modules/moderation/commands/purge.js";
+import { projectCommand } from "../modules/projects/commands/project.js";
 import { reactionRoleCommand } from "../modules/reactionRoles/commands/reactionRole.js";
+import { setSocialChannelCommand } from "../modules/social/commands/setSocialChannel.js";
 import { defineCommand } from "../modules/utility/commands/define.js";
 import { pingCommand } from "../modules/utility/commands/ping.js";
 import { remindCommand } from "../modules/utility/commands/remind.js";
@@ -30,12 +34,16 @@ export const registeredCommands: SlashCommand[] = [
   unsetAdminRoleCommand,
   unsetSrmodRoleCommand,
   unsetModRoleCommand,
+  setCalendarCommand,
+  setEmailChannelCommand,
+  setSocialChannelCommand,
   banCommand,
   massbanCommand,
   kickCommand,
   muteCommand,
   purgeCommand,
   reactionRoleCommand,
+  projectCommand,
   defineCommand,
   remindCommand,
   timestampCommand,

@@ -10,6 +10,8 @@ Gears handles moderation, staff role configuration, reaction roles, reminders, t
 - **Moderation** — mute, kick, ban, massban, purge (with hierarchy checks + case logging)
 - **Reaction roles** — button-based role panels with persisted mappings
 - **Utilities** — reminders, timestamps, timezones, dictionary lookups, server/user/role info
+- **ESW projects** — searchable Plan.io project database with chapter summaries and page links
+- **Integrations** — Google Calendar → Discord events, list-email → Discord, Instagram/LinkedIn auto-posts
 - **Permissions** — bot-level ranks layered with native Discord permissions
 
 ## Stack
@@ -62,6 +64,10 @@ See [`.env.example`](.env.example):
 | `DISCORD_GUILD_ID` | Test guild for guild command registration |
 | `SUPABASE_URL` | Supabase project URL |
 | `SUPABASE_SERVICE_ROLE_KEY` | Service role key (server-side only) |
+| `PLANIO_BASE_URL` | Optional Plan.io host (defaults to the public ESW projects DB) |
+| `IMAP_*` | Optional dedicated mailbox for list-email → Discord |
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | Optional service account JSON for Calendar sync |
+| `INSTAGRAM_*` / `LINKEDIN_*` | Optional social auto-post credentials |
 
 Keep `.env` private — it is gitignored.
 

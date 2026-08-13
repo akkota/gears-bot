@@ -26,6 +26,10 @@ They are applied manually in Supabase.
 - `suggestions`
 - `reaction_role_messages`
 - `reaction_role_options`
+- `esw_projects`
+- `social_posts_seen`
+- `email_messages_seen`
+- `calendar_event_sync`
 
 ## Repository Rule
 
@@ -44,6 +48,10 @@ Command handlers should call services, and services should call repositories.
   - `mod_role_id`
   - `log_channel_id`
   - `default_timezone`
+  - `social_announce_channel_id`
+  - `email_announce_channel_id`
+  - `google_calendar_id`
+  - `calendar_announce_channel_id`
 
 ## Implemented Moderation Writes
 
@@ -85,3 +93,13 @@ It does not persist each individual deleted message.
 
 - `reaction_role_messages` panel rows (`guild_id`, `channel_id`, `message_id`, mode `button`)
 - `reaction_role_options` role mapping rows for each button option
+
+`/project search` currently writes:
+
+- `esw_projects` cache rows upserted from Plan.io (`planio_id`, identifier, name, chapter, status, summary, url)
+
+Email/social/calendar workers currently write:
+
+- `email_messages_seen` by `Message-ID`
+- `social_posts_seen` by platform + external id
+- `calendar_event_sync` mapping Google event ids to Discord scheduled event ids

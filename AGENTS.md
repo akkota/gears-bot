@@ -13,12 +13,15 @@ The current MVP includes:
 - Reaction roles
 - Reminders
 - Timezone utilities
+- ESW project search (Plan.io)
+- Email list → Discord
+- Google Calendar → Discord events
+- Instagram/LinkedIn auto-posts
 
 Future modules may include:
 
 - Tickets/modmail
 - QOTW/topic system
-- Google Calendar sync
 - Chapter updates
 - XP/economy
 - Analytics
@@ -64,6 +67,10 @@ Only implement these commands unless explicitly asked otherwise:
 /define
 /suggest
 /reaction-role
+/project
+/set-email-channel
+/set-calendar
+/set-social-channel
 ```
 
 ## Permission Rules

@@ -33,6 +33,10 @@ Implemented commands currently:
 - `/userinfo`
 - `/serverinfo`
 - `/roleinfo`
+- `/project`
+- `/set-email-channel`
+- `/set-calendar`
+- `/set-social-channel`
 
 `/ping` exists to verify:
 
@@ -131,6 +135,23 @@ Define command behavior:
 - Handles missing words with a clear not-found response.
 - Handles network/API failures gracefully with a retry-later style response.
 - Does not perform any database writes.
+
+Project search command behavior:
+
+- `/project search` is available to everyone.
+- Syncs public Plan.io projects into `esw_projects` (worker every 6h; on-demand if cache is empty).
+- Matches query tokens against name, chapter, type, status, and summary.
+- Optional `chapter` filter.
+- Returns embeds plus link buttons to the Plan.io project page. Pagination uses `proj:` button custom ids.
+- Does not display contact emails.
+
+Email/calendar/social setup behavior:
+
+- `/set-email-channel`, `/set-calendar`, and `/set-social-channel` require server owner or configured Admin.
+- Workers no-op when credentials are missing.
+- Email poller uses IMAP on a dedicated mailbox and ignores replies/bounces.
+- Calendar worker polls Google Calendar and upserts Discord scheduled events as External.
+- Social worker polls Instagram Graph API and LinkedIn org posts, with silent first-run import.
 
 Timezone command behavior:
 

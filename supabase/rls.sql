@@ -24,6 +24,10 @@ alter table suggestion_votes enable row level security;
 alter table reaction_role_messages enable row level security;
 alter table reaction_role_options enable row level security;
 alter table bot_audit_logs enable row level security;
+alter table esw_projects enable row level security;
+alter table social_posts_seen enable row level security;
+alter table email_messages_seen enable row level security;
+alter table calendar_event_sync enable row level security;
 
 
 -- =========================
@@ -47,6 +51,10 @@ alter table suggestion_votes force row level security;
 alter table reaction_role_messages force row level security;
 alter table reaction_role_options force row level security;
 alter table bot_audit_logs force row level security;
+alter table esw_projects force row level security;
+alter table social_posts_seen force row level security;
+alter table email_messages_seen force row level security;
+alter table calendar_event_sync force row level security;
 
 
 -- =========================
@@ -69,6 +77,10 @@ revoke all on table suggestion_votes from anon, authenticated;
 revoke all on table reaction_role_messages from anon, authenticated;
 revoke all on table reaction_role_options from anon, authenticated;
 revoke all on table bot_audit_logs from anon, authenticated;
+revoke all on table esw_projects from anon, authenticated;
+revoke all on table social_posts_seen from anon, authenticated;
+revoke all on table email_messages_seen from anon, authenticated;
+revoke all on table calendar_event_sync from anon, authenticated;
 
 
 -- =========================

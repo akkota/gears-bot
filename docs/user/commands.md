@@ -663,6 +663,75 @@ Example success response:
 Common errors:
 - Role not found.
 
+## `/project search`
+Purpose:
+- Search the ESW projects database by topic, project name, or chapter.
+
+Who can use it:
+- Everyone.
+
+Example:
+- `/project search query:hydroponics`
+- `/project search query:smoothie bike chapter:Brown`
+
+Inputs:
+- `query` (required): keyword, project name, or topic.
+- `chapter` (optional): school/chapter name filter.
+
+What happens:
+- Bot searches cached Plan.io projects.
+- Results show chapter, status, a short summary, and buttons that open the project page.
+
+Example success response:
+- Embed titled `ESW project search` with matching projects and link buttons.
+
+Common errors:
+- `No matching projects found.`: try a broader keyword or different chapter name.
+- Search temporarily unavailable: Plan.io or the database could not be reached.
+
+## `/set-email-channel`
+Purpose:
+- Choose where distribution-list emails are posted.
+
+Who can use it:
+- Server owner or configured Admin.
+
+Example:
+- `/set-email-channel channel:#announcements`
+
+What happens:
+- Bot stores the channel. A dedicated mailbox (configured via IMAP env vars) is polled and new list emails are posted here. Replies and bounce messages are ignored.
+
+## `/set-calendar`
+Purpose:
+- Connect a Google Calendar so new events become Discord scheduled events.
+
+Who can use it:
+- Server owner or configured Admin.
+
+Example:
+- `/set-calendar calendar_id:esw@group.calendar.google.com announce_channel:#events`
+
+Inputs:
+- `calendar_id` (required): Google Calendar ID.
+- `announce_channel` (optional): also post a message when a new event is synced.
+
+What happens:
+- Bot stores the calendar ID and syncs upcoming events into Discord Scheduled Events.
+
+## `/set-social-channel`
+Purpose:
+- Choose where Instagram and LinkedIn posts are mirrored.
+
+Who can use it:
+- Server owner or configured Admin.
+
+Example:
+- `/set-social-channel channel:#social`
+
+What happens:
+- Bot stores the channel. Configured Instagram/LinkedIn accounts are polled; new posts are announced with a link. Existing posts are imported silently on first run.
+
 ## Moderation Policy Note
 - Team policy: 3 warnings should trigger a 1-day mute.
 - Current status: `/warn` is not implemented yet in this build, so this policy is not automated yet.

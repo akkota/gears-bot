@@ -104,6 +104,10 @@ After setup, test these commands in a safe test server:
 - `/userinfo`
 - `/serverinfo`
 - `/roleinfo`
+- `/project search query:hydroponics`
+- `/set-email-channel`
+- `/set-calendar`
+- `/set-social-channel`
 
 For `/ban` and `/massban` specifically:
 - Automated checks pass in development.

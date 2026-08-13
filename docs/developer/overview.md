@@ -33,14 +33,22 @@ Current implemented bootstrap features:
   - `/kick`
   - `/mute`
   - `/purge`
-  - `/reaction-role`
-  - `/remind`
+- `/reaction-role`
+- `/project`
+- `/set-email-channel`
+- `/set-calendar`
+- `/set-social-channel`
+- `/remind`
   - `/timestamp`
   - `/define`
   - `/timezone`
   - `/userinfo`
   - `/serverinfo`
   - `/roleinfo`
+  - `/project`
+  - `/set-email-channel`
+  - `/set-calendar`
+  - `/set-social-channel`
 
 ## Architecture Rules
 
@@ -95,3 +103,7 @@ Current implementation status:
 - `/define` is stateless, uses a dictionary provider abstraction, and handles missing words/API errors without database writes.
 - `/timezone` provides timezone set/view/convert/guild-default flows using `user_timezones` plus `guild_settings.default_timezone` fallback.
 - Info commands are stateless, use live Discord data, and perform no database writes.
+- `/project search` syncs public Plan.io projects into `esw_projects` and returns chapter + summary + project-page buttons.
+- `/set-email-channel` stores the destination for a dedicated-mailbox IMAP poller that posts new list emails.
+- `/set-calendar` stores a Google Calendar ID; a worker creates/updates Discord scheduled events.
+- `/set-social-channel` stores the destination for Instagram Graph API and LinkedIn org post polling. First poll imports existing posts silently.

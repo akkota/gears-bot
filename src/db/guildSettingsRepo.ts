@@ -14,6 +14,10 @@ export interface GuildSettings {
   modRoleId: string | null;
   logChannelId: string | null;
   defaultTimezone: string | null;
+  socialAnnounceChannelId: string | null;
+  emailAnnounceChannelId: string | null;
+  googleCalendarId: string | null;
+  calendarAnnounceChannelId: string | null;
 }
 
 export interface GuildSettingsUpdate {
@@ -22,6 +26,10 @@ export interface GuildSettingsUpdate {
   modRoleId?: string | null;
   logChannelId?: string | null;
   defaultTimezone?: string | null;
+  socialAnnounceChannelId?: string | null;
+  emailAnnounceChannelId?: string | null;
+  googleCalendarId?: string | null;
+  calendarAnnounceChannelId?: string | null;
 }
 
 interface GuildSettingsRow {
@@ -31,10 +39,14 @@ interface GuildSettingsRow {
   mod_role_id: string | null;
   log_channel_id: string | null;
   default_timezone: string | null;
+  social_announce_channel_id: string | null;
+  email_announce_channel_id: string | null;
+  google_calendar_id: string | null;
+  calendar_announce_channel_id: string | null;
 }
 
 const SELECT_COLUMNS =
-  "guild_id,admin_role_id,srmod_role_id,mod_role_id,log_channel_id,default_timezone";
+  "guild_id,admin_role_id,srmod_role_id,mod_role_id,log_channel_id,default_timezone,social_announce_channel_id,email_announce_channel_id,google_calendar_id,calendar_announce_channel_id";
 
 function mapGuildSettingsRow(row: GuildSettingsRow): GuildSettings {
   return {
@@ -44,6 +56,10 @@ function mapGuildSettingsRow(row: GuildSettingsRow): GuildSettings {
     modRoleId: row.mod_role_id,
     logChannelId: row.log_channel_id,
     defaultTimezone: row.default_timezone,
+    socialAnnounceChannelId: row.social_announce_channel_id,
+    emailAnnounceChannelId: row.email_announce_channel_id,
+    googleCalendarId: row.google_calendar_id,
+    calendarAnnounceChannelId: row.calendar_announce_channel_id,
   };
 }
 
@@ -127,6 +143,22 @@ function toDbUpdatePayload(update: GuildSettingsUpdate): Record<string, string |
     payload.default_timezone = update.defaultTimezone ?? null;
   }
 
+  if (Object.hasOwn(update, "socialAnnounceChannelId")) {
+    payload.social_announce_channel_id = update.socialAnnounceChannelId ?? null;
+  }
+
+  if (Object.hasOwn(update, "emailAnnounceChannelId")) {
+    payload.email_announce_channel_id = update.emailAnnounceChannelId ?? null;
+  }
+
+  if (Object.hasOwn(update, "googleCalendarId")) {
+    payload.google_calendar_id = update.googleCalendarId ?? null;
+  }
+
+  if (Object.hasOwn(update, "calendarAnnounceChannelId")) {
+    payload.calendar_announce_channel_id = update.calendarAnnounceChannelId ?? null;
+  }
+
   return payload;
 }
 
@@ -158,4 +190,17 @@ export async function upsertGuildSettings(
   }
 
   return updatedSettings;
+}
+
+export async function listGuildSettings(): Promise<GuildSettings[]> {
+  const { data, error } = await supabase
+    .from("guild_settings")
+    .select(SELECT_COLUMNS)
+    .returns<GuildSettingsRow[]>();
+
+  if (error) {
+    throw new Error(`Failed to list guild settings: ${error.message}`);
+  }
+
+  return (data ?? []).map(mapGuildSettingsRow);
 }
