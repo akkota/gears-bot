@@ -770,7 +770,7 @@ Who can use it:
 
 Example:
 - `/givexp user:@Ada amount:500`
-- `/setxp user:@Ada amount:1600`
+- `/setxp user:@Ada amount:800`
 
 What happens:
 - XP updates through the same path as chat XP, so skipped ranks still unlock and Discord roles stay in sync.
@@ -793,7 +793,7 @@ Example:
 What happens:
 - `/level-role add` creates a Discord role from `name` if you omit `role` (reuses an exact name match). New roles are created with no extra permissions at the bottom of the role list, just above @everyone.
 - The highest qualifying rank is the member's current role. Lower ladder roles are removed. Unrelated Discord roles are left alone.
-- Chat XP (15 XP / message, 60s cooldown) uses this same ladder.
+- Chat XP (25 XP / message, 30s cooldown) uses this same ladder.
 
 ## Moderation Policy Note
 - Team policy: 3 warnings should trigger a 1-day mute.

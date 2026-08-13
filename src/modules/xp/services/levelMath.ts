@@ -1,9 +1,9 @@
 /**
  * Level 1 starts at 0 XP.
- * Cumulative XP required to reach level L is 100 * (L - 1)^2.
- * Inverse: levelFromXp(xp) = floor(sqrt(xp / 100)) + 1
+ * Cumulative XP required to reach level L is 50 * (L - 1)^2.
+ * Inverse: levelFromXp(xp) = floor(sqrt(xp / 50)) + 1
  */
-export const XP_CURVE_FACTOR = 100;
+export const XP_CURVE_FACTOR = 50;
 
 export function xpForLevel(level: number): number {
   const safeLevel = Math.max(1, Math.floor(level));

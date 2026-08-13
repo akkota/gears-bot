@@ -18,18 +18,18 @@ describe("level formula", () => {
     expect(xpForLevel(1)).toBe(0);
   });
 
-  it("uses 100 * (L-1)^2 for level thresholds", () => {
-    expect(xpForLevel(2)).toBe(100);
-    expect(xpForLevel(5)).toBe(1600);
-    expect(levelFromXp(100)).toBe(2);
-    expect(levelFromXp(1599)).toBe(4);
-    expect(levelFromXp(1600)).toBe(5);
+  it("uses 50 * (L-1)^2 for level thresholds", () => {
+    expect(xpForLevel(2)).toBe(50);
+    expect(xpForLevel(5)).toBe(800);
+    expect(levelFromXp(50)).toBe(2);
+    expect(levelFromXp(799)).toBe(4);
+    expect(levelFromXp(800)).toBe(5);
   });
 
   it("computes remaining XP to the next level", () => {
-    const progress = xpToNextLevel(100);
+    const progress = xpToNextLevel(50);
     expect(progress.level).toBe(2);
-    expect(progress.xpNeeded).toBe(xpForLevel(3) - 100);
+    expect(progress.xpNeeded).toBe(xpForLevel(3) - 50);
   });
 });
 
@@ -72,7 +72,7 @@ describe("rank ladder", () => {
 });
 
 describe("message XP cooldown", () => {
-  it("blocks another award within 60 seconds", () => {
+  it("blocks another award within 30 seconds", () => {
     const now = Date.parse("2026-08-13T00:01:00.000Z");
     expect(
       isOnMessageXpCooldown(
@@ -80,7 +80,7 @@ describe("message XP cooldown", () => {
           guildId: "g",
           userId: "u",
           xp: 15,
-          lastMessageXpAt: "2026-08-13T00:00:30.000Z",
+          lastMessageXpAt: "2026-08-13T00:00:45.000Z",
         },
         now,
       ),
@@ -91,7 +91,7 @@ describe("message XP cooldown", () => {
           guildId: "g",
           userId: "u",
           xp: 15,
-          lastMessageXpAt: "2026-08-13T00:00:00.000Z",
+          lastMessageXpAt: "2026-08-13T00:00:30.000Z",
         },
         now,
       ),

@@ -588,7 +588,7 @@ create index if not exists idx_calendar_event_sync_guild
 -- =========================
 -- USER XP / LEVELS
 -- =========================
--- Level 1 at 0 XP. XP to reach level L is 100 * (L - 1)^2.
+-- Level 1 at 0 XP. XP to reach level L is 50 * (L - 1)^2.
 
 create table if not exists user_xp (
   guild_id text not null references guilds(guild_id) on delete cascade,

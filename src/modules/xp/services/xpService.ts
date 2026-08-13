@@ -20,8 +20,8 @@ import {
   type RankDefinition,
 } from "./rankLadder.js";
 
-export const MESSAGE_XP_AMOUNT = 15;
-export const MESSAGE_XP_COOLDOWN_MS = 60_000;
+export const MESSAGE_XP_AMOUNT = 25;
+export const MESSAGE_XP_COOLDOWN_MS = 30_000;
 export const MAX_STORED_XP = 10_000_000;
 
 export interface XpChangeResult {
