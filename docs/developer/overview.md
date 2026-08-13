@@ -109,4 +109,4 @@ Current implementation status:
 - `/set-social-channel` stores the destination for Instagram Graph API and LinkedIn org post polling. First poll imports existing posts silently.
 - `/rank` shows XP level, current customizable rank, next-role progress, and Unlocked/Current/Locked.
 - Chat messages award 15 XP (60s cooldown). `/givexp` and `/setxp` use the same award path so skipped ranks still unlock.
-- `/level-role` lets admins set name + required level + Discord role. Highest qualifying rank is synced; lower ladder roles are removed.
+- `/level-role` lets admins set name + required level. Discord roles are created from the name at the bottom of the hierarchy unless an existing role is passed. Highest qualifying rank is synced; lower ladder roles are removed.

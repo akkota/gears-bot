@@ -1,10 +1,4 @@
-import {
-  MessageFlags,
-  PermissionFlagsBits,
-  Role,
-  SlashCommandBuilder,
-  type Guild,
-} from "discord.js";
+import { MessageFlags, Role, SlashCommandBuilder } from "discord.js";
 import {
   createLevelRole,
   deleteLevelRole,
@@ -12,29 +6,11 @@ import {
 } from "../../../db/levelRolesRepo.js";
 import type { SlashCommand } from "../../../shared/command.js";
 import { requireOwnerOrConfiguredAdmin } from "../../../shared/permissions.js";
+import {
+  ensureRankDiscordRole,
+  LevelRoleSetupError,
+} from "../services/levelRoleSetup.js";
 import { DEFAULT_LEVEL_ROLES } from "../services/rankLadder.js";
-
-export class LevelRoleSetupError extends Error {}
-
-async function resolveOrCreateNamedRole(guild: Guild, name: string): Promise<Role> {
-  const fetched = await guild.roles.fetch();
-  const existing = fetched.find((role) => role.name === name);
-  if (existing) {
-    return existing;
-  }
-
-  const botMember = guild.members.me;
-  if (!botMember?.permissions.has(PermissionFlagsBits.ManageRoles)) {
-    throw new LevelRoleSetupError(
-      "I need the Manage Roles permission to create default rank roles.",
-    );
-  }
-
-  return guild.roles.create({
-    name,
-    reason: `Create default level rank ${name}`,
-  });
-}
 
 function uniqueConstraintMessage(error: unknown): string | null {
   const message = error instanceof Error ? error.message : "";
@@ -54,7 +30,7 @@ export const levelRoleCommand: SlashCommand = {
     .addSubcommand((sub) =>
       sub
         .setName("add")
-        .setDescription("Add a rank at a required level.")
+        .setDescription("Add a rank at a required level. Creates a Discord role from the name if you omit role.")
         .addStringOption((option) =>
           option.setName("name").setDescription("Rank name.").setRequired(true).setMaxLength(80),
         )
@@ -69,8 +45,8 @@ export const levelRoleCommand: SlashCommand = {
         .addRoleOption((option) =>
           option
             .setName("role")
-            .setDescription("Discord role to assign at this rank.")
-            .setRequired(true),
+            .setDescription("Existing Discord role to use. Leave empty to create one from the name.")
+            .setRequired(false),
         ),
     )
     .addSubcommand((sub) =>
@@ -131,14 +107,24 @@ export const levelRoleCommand: SlashCommand = {
       if (subcommand === "add") {
         const name = interaction.options.getString("name", true).trim();
         const level = interaction.options.getInteger("level", true);
-        const role = interaction.options.getRole("role", true);
+        const providedRole = interaction.options.getRole("role", false);
         if (!name) {
           await interaction.editReply({ content: "Rank name cannot be empty." });
           return;
         }
-        if (!(role instanceof Role)) {
-          await interaction.editReply({ content: "Could not resolve that Discord role." });
-          return;
+
+        let role: Role;
+        let createdRole = false;
+        if (providedRole) {
+          if (!(providedRole instanceof Role)) {
+            await interaction.editReply({ content: "Could not resolve that Discord role." });
+            return;
+          }
+          role = providedRole;
+        } else {
+          const ensured = await ensureRankDiscordRole(guild, name);
+          role = ensured.role;
+          createdRole = ensured.created;
         }
 
         await createLevelRole({
@@ -148,7 +134,9 @@ export const levelRoleCommand: SlashCommand = {
           discordRoleId: role.id,
         });
         await interaction.editReply({
-          content: `Added **${name}** at level ${level} (${role}).`,
+          content: createdRole
+            ? `Added **${name}** at level ${level} (${role}). Created that Discord role at the bottom of the role list.`
+            : `Added **${name}** at level ${level} (${role}).`,
         });
         return;
       }
@@ -185,7 +173,7 @@ export const levelRoleCommand: SlashCommand = {
           continue;
         }
 
-        const role = await resolveOrCreateNamedRole(guild, rank.name);
+        const { role } = await ensureRankDiscordRole(guild, rank.name);
         await createLevelRole({
           ...guildMeta,
           name: rank.name,

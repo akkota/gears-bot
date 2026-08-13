@@ -771,11 +771,13 @@ Who can use it:
 
 Example:
 - `/level-role setup-defaults`
+- `/level-role add name:Rising level:5`
 - `/level-role add name:Rising level:5 role:@Rising`
 - `/level-role list`
 - `/level-role remove level:5`
 
 What happens:
+- `/level-role add` creates a Discord role from `name` if you omit `role` (reuses an exact name match). New roles are created with no extra permissions at the bottom of the role list, just above @everyone.
 - The highest qualifying rank is the member's current role. Lower ladder roles are removed. Unrelated Discord roles are left alone.
 - Chat XP (15 XP / message, 60s cooldown) uses this same ladder.
 

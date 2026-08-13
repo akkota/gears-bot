@@ -163,7 +163,7 @@ XP / level-role behavior:
 - Chat XP awards 15 XP per guild message with a 60s cooldown (`GuildMessages` intent; message text is not read).
 - `/givexp` and `/setxp` require bot-level `srmod` and use the same award path as chat XP.
 - Crossing a rank (including skipped ranks) posts a short New Role Unlocked notice and syncs the highest qualifying Discord role.
-- `/level-role` requires server owner or configured Admin. Admins set name + required level + Discord role, or seed Beginner→Master defaults.
+- `/level-role` requires server owner or configured Admin. Admins set name + required level; Discord role is optional and is created from the name (lowest hierarchy) if omitted. `/level-role setup-defaults` seeds Beginner→Master the same way.
 
 Timezone command behavior:
 
