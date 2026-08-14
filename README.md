@@ -14,6 +14,7 @@ Gears handles moderation, staff role configuration, reaction roles, reminders, t
 - **Integrations** — Google Calendar → Discord events, list-email → Discord, Instagram/LinkedIn auto-posts
 - **XP / ranks** — chat XP, `/xp`, `/rank`, and a customizable level-up role ladder
 - **Server ops** — welcome/boost messages, repeating announcements, autoresponder, embed maker
+- **Habit bridge** — `/set-habit-channel` posts website challenge proofs for Discord Approve/Reject
 - **Permissions** — bot-level ranks layered with native Discord permissions
 
 ## Stack

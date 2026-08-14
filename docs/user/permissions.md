@@ -66,6 +66,7 @@ When moderating members:
 - `/repeat`: server owner or configured Admin
 - `/autorespond`: server owner or configured Admin
 - `/embed`: server owner or configured Admin
+- `/set-habit-channel`: server owner or configured Admin
 
 ## Staff Roles Created By Setup Commands
 If you run setup commands without selecting a role, the bot can reuse/create:

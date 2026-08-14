@@ -1,4 +1,5 @@
 import { MessageFlags, type Interaction } from "discord.js";
+import { handleHabitChallengeButton } from "../modules/habits/services/habitChallengeWorker.js";
 import {
   paginateProjects,
   searchEswProjects,
@@ -28,6 +29,18 @@ export async function handleInteraction(interaction: Interaction): Promise<void>
             flags: MessageFlags.Ephemeral,
           })
           .catch(() => undefined);
+      }
+      return;
+    }
+
+    if (
+      interaction.customId.startsWith("habit:approve:") ||
+      interaction.customId.startsWith("habit:reject:")
+    ) {
+      try {
+        await handleHabitChallengeButton(interaction);
+      } catch (error) {
+        console.error("Habit button failed:", error);
       }
       return;
     }

@@ -18,6 +18,7 @@ export interface GuildSettings {
   emailAnnounceChannelId: string | null;
   googleCalendarId: string | null;
   calendarAnnounceChannelId: string | null;
+  habitChallengeChannelId: string | null;
 }
 
 export interface GuildSettingsUpdate {
@@ -30,6 +31,7 @@ export interface GuildSettingsUpdate {
   emailAnnounceChannelId?: string | null;
   googleCalendarId?: string | null;
   calendarAnnounceChannelId?: string | null;
+  habitChallengeChannelId?: string | null;
 }
 
 interface GuildSettingsRow {
@@ -43,10 +45,11 @@ interface GuildSettingsRow {
   email_announce_channel_id: string | null;
   google_calendar_id: string | null;
   calendar_announce_channel_id: string | null;
+  habit_challenge_channel_id: string | null;
 }
 
 const SELECT_COLUMNS =
-  "guild_id,admin_role_id,srmod_role_id,mod_role_id,log_channel_id,default_timezone,social_announce_channel_id,email_announce_channel_id,google_calendar_id,calendar_announce_channel_id";
+  "guild_id,admin_role_id,srmod_role_id,mod_role_id,log_channel_id,default_timezone,social_announce_channel_id,email_announce_channel_id,google_calendar_id,calendar_announce_channel_id,habit_challenge_channel_id";
 
 function mapGuildSettingsRow(row: GuildSettingsRow): GuildSettings {
   return {
@@ -60,6 +63,7 @@ function mapGuildSettingsRow(row: GuildSettingsRow): GuildSettings {
     emailAnnounceChannelId: row.email_announce_channel_id,
     googleCalendarId: row.google_calendar_id,
     calendarAnnounceChannelId: row.calendar_announce_channel_id,
+    habitChallengeChannelId: row.habit_challenge_channel_id,
   };
 }
 
@@ -157,6 +161,10 @@ function toDbUpdatePayload(update: GuildSettingsUpdate): Record<string, string |
 
   if (Object.hasOwn(update, "calendarAnnounceChannelId")) {
     payload.calendar_announce_channel_id = update.calendarAnnounceChannelId ?? null;
+  }
+
+  if (Object.hasOwn(update, "habitChallengeChannelId")) {
+    payload.habit_challenge_channel_id = update.habitChallengeChannelId ?? null;
   }
 
   return payload;

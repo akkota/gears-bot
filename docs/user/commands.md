@@ -856,6 +856,19 @@ Example:
 What happens:
 - Edit only works on embeds created with `/embed create` (message id or message link).
 
+## `/set-habit-channel`
+Purpose:
+- Choose where website habit proofs are posted for Discord Approve/Reject.
+
+Who can use it:
+- Server owner or configured Admin.
+
+Example:
+- `/set-habit-channel channel:#challenges`
+
+What happens:
+- Pending photo logs from the ESW website are posted with Approve/Reject buttons (Mod+). Either Discord or the website staff queue can verify the same log.
+
 ## Moderation Policy Note
 - Team policy: 3 warnings should trigger a 1-day mute.
 - Current status: `/warn` is not implemented yet in this build, so this policy is not automated yet.

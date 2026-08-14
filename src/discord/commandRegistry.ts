@@ -12,6 +12,7 @@ import { kickCommand } from "../modules/moderation/commands/kick.js";
 import { massbanCommand } from "../modules/moderation/commands/massban.js";
 import { muteCommand } from "../modules/moderation/commands/mute.js";
 import { purgeCommand } from "../modules/moderation/commands/purge.js";
+import { setHabitChannelCommand } from "../modules/habits/commands/setHabitChannel.js";
 import { projectCommand } from "../modules/projects/commands/project.js";
 import { reactionRoleCommand } from "../modules/reactionRoles/commands/reactionRole.js";
 import { autorespondCommand } from "../modules/server/commands/autorespond.js";
@@ -46,6 +47,7 @@ export const registeredCommands: SlashCommand[] = [
   setCalendarCommand,
   setEmailChannelCommand,
   setSocialChannelCommand,
+  setHabitChannelCommand,
   banCommand,
   massbanCommand,
   kickCommand,

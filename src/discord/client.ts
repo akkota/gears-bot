@@ -1,6 +1,7 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
 import { startCalendarSyncWorker } from "../modules/calendar/services/calendarSyncWorker.js";
 import { startEmailWorker } from "../modules/email/services/emailWorker.js";
+import { startHabitChallengeWorker } from "../modules/habits/services/habitChallengeWorker.js";
 import { startProjectSyncWorker } from "../modules/projects/services/projectSyncWorker.js";
 import { handleGuildAutorespond } from "../modules/server/services/autorespondListener.js";
 import { startRepeatWorker } from "../modules/server/services/repeatWorker.js";
@@ -24,6 +25,7 @@ export function createDiscordClient(): Client {
     console.log(`Logged in as ${readyClient.user.tag}`);
     startReminderWorker(readyClient);
     startRepeatWorker(readyClient);
+    startHabitChallengeWorker(readyClient);
     startProjectSyncWorker();
     startEmailWorker(readyClient);
     startCalendarSyncWorker(readyClient);

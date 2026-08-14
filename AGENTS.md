@@ -19,6 +19,7 @@ The current MVP includes:
 - Instagram/LinkedIn auto-posts
 - XP / levels and customizable level-up roles
 - Welcome / boost messages, repeating messages, autoresponder, embed maker
+- Website habit challenge verification bridge (`/set-habit-channel`)
 
 Future modules may include:
 
@@ -72,6 +73,7 @@ Only implement these commands unless explicitly asked otherwise:
 /set-email-channel
 /set-calendar
 /set-social-channel
+/set-habit-channel
 /rank
 /xp
 /givexp

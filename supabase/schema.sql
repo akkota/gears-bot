@@ -93,6 +93,7 @@ create table if not exists guild_settings (
   email_announce_channel_id text,
   google_calendar_id text,
   calendar_announce_channel_id text,
+  habit_challenge_channel_id text,
 
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -109,6 +110,9 @@ alter table guild_settings
 
 alter table guild_settings
   add column if not exists calendar_announce_channel_id text;
+
+alter table guild_settings
+  add column if not exists habit_challenge_channel_id text;
 
 create index if not exists idx_guild_settings_mod_role
   on guild_settings(mod_role_id);
