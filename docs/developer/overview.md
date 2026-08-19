@@ -39,6 +39,7 @@ Current implemented bootstrap features:
   - `/set-calendar`
   - `/set-social-channel`
   - `/rank`
+  - `/garden`
   - `/xp`
   - `/givexp`
   - `/setxp`
@@ -112,9 +113,8 @@ Current implementation status:
 - `/set-email-channel` stores the destination for a dedicated-mailbox IMAP poller that posts new list emails.
 - `/set-calendar` stores a Google Calendar ID; a worker creates/updates Discord scheduled events.
 - `/set-social-channel` stores the destination for Instagram Graph API and LinkedIn org post polling. First poll imports existing posts silently.
-- `/rank` shows XP level, current customizable rank, next-role progress, and Unlocked/Current/Locked.
-- `/xp` shows XP total, level, rank, and progress to the next level.
-- Chat messages award 25 XP (30s cooldown). `/givexp` and `/setxp` use the same award path so skipped ranks still unlock.
+- `/rank` is a garden card: plots, plants, and the Discord rank as a small field. `/garden` plants, waters, harvests, and uses produce for a timed chat-XP multiplier (one boost at a time).
+- Chat messages award 25 XP (30s cooldown), multiplied by an active garden boost if one is running. `/givexp` and `/setxp` use the same award path so skipped ranks still unlock.
 - `/level-role` lets admins set name + required level. Discord roles are created from the name at the bottom of the hierarchy unless an existing role is passed. Highest qualifying rank is synced; lower ladder roles are removed.
 - `/welcome` stores join and boost message templates (`{user}`, `{server}`, `{memberCount}`, `{boosts}`).
 - `/repeat` posts a message on an interval (minimum 1 minute).

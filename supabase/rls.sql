@@ -34,6 +34,9 @@ alter table welcome_settings enable row level security;
 alter table repeat_messages enable row level security;
 alter table autoresponses enable row level security;
 alter table bot_embeds enable row level security;
+alter table garden_plots enable row level security;
+alter table garden_inventory enable row level security;
+alter table garden_active_boosts enable row level security;
 
 
 -- =========================
@@ -67,6 +70,9 @@ alter table welcome_settings force row level security;
 alter table repeat_messages force row level security;
 alter table autoresponses force row level security;
 alter table bot_embeds force row level security;
+alter table garden_plots force row level security;
+alter table garden_inventory force row level security;
+alter table garden_active_boosts force row level security;
 
 
 -- =========================
@@ -99,6 +105,9 @@ revoke all on table welcome_settings from anon, authenticated;
 revoke all on table repeat_messages from anon, authenticated;
 revoke all on table autoresponses from anon, authenticated;
 revoke all on table bot_embeds from anon, authenticated;
+revoke all on table garden_plots from anon, authenticated;
+revoke all on table garden_inventory from anon, authenticated;
+revoke all on table garden_active_boosts from anon, authenticated;
 
 
 -- =========================

@@ -58,6 +58,7 @@ When moderating members:
 - `/set-calendar`: server owner or configured Admin
 - `/set-social-channel`: server owner or configured Admin
 - `/rank`: everyone
+- `/garden`: everyone
 - `/xp`: everyone
 - `/givexp`: SrMod+
 - `/setxp`: SrMod+

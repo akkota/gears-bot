@@ -5,12 +5,14 @@ import {
   type Message,
   type TextBasedChannel,
 } from "discord.js";
+import { getActiveGardenBoost } from "../../../db/gardenRepo.js";
 import {
   getUserXp,
   upsertUserXp,
   type UserXpRecord,
 } from "../../../db/userXpRepo.js";
 import { listLevelRoles } from "../../../db/levelRolesRepo.js";
+import { formatGardenUnlocks } from "../../garden/services/gardenCatalog.js";
 import { levelFromXp } from "./levelMath.js";
 import {
   formatUnlockMessage,
@@ -94,6 +96,10 @@ export async function applyXpChange(params: {
     });
   }
 
+  const rankUnlock = formatUnlockMessage(crossedRanks);
+  const gardenUnlock = formatGardenUnlocks(previousLevel, level);
+  const unlockMessage = [rankUnlock, gardenUnlock].filter(Boolean).join("\n") || null;
+
   return {
     previousXp,
     xp: nextXp,
@@ -102,7 +108,7 @@ export async function applyXpChange(params: {
     previousRank,
     currentRank,
     crossedRanks,
-    unlockMessage: formatUnlockMessage(crossedRanks),
+    unlockMessage,
   };
 }
 
@@ -148,11 +154,16 @@ export async function handleMessageXp(message: Message): Promise<string | null> 
     message.member ??
     (await message.guild.members.fetch(message.author.id).catch(() => null));
 
+  const boost = await getActiveGardenBoost(message.guild.id, message.author.id).catch(() => null);
+  const amount = boost
+    ? Math.max(1, Math.floor(MESSAGE_XP_AMOUNT * boost.multiplier))
+    : MESSAGE_XP_AMOUNT;
+
   const result = await applyXpChange({
     guild: message.guild,
     member,
     userId: message.author.id,
-    nextXp: (record?.xp ?? 0) + MESSAGE_XP_AMOUNT,
+    nextXp: (record?.xp ?? 0) + amount,
     touchMessageCooldown: true,
   });
 

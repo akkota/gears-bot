@@ -114,6 +114,7 @@ After setup, test these commands in a safe test server:
 - `/set-calendar`
 - `/set-social-channel`
 - `/rank`
+- `/garden`
 - `/xp`
 - `/level-role setup-defaults`
 - `/givexp`

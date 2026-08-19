@@ -17,7 +17,7 @@ The current MVP includes:
 - Email list → Discord
 - Google Calendar → Discord events
 - Instagram/LinkedIn auto-posts
-- XP / levels and customizable level-up roles
+- XP / levels, garden plots, and customizable level-up roles
 - Welcome / boost messages, repeating messages, autoresponder, embed maker
 - Website habit challenge verification bridge (`/set-habit-channel`)
 
@@ -75,6 +75,7 @@ Only implement these commands unless explicitly asked otherwise:
 /set-social-channel
 /set-habit-channel
 /rank
+/garden
 /xp
 /givexp
 /setxp

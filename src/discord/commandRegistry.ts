@@ -28,6 +28,7 @@ import { serverinfoCommand } from "../modules/utility/commands/serverinfo.js";
 import { timezoneCommand } from "../modules/utility/commands/timezone.js";
 import { timestampCommand } from "../modules/utility/commands/timestamp.js";
 import { userinfoCommand } from "../modules/utility/commands/userinfo.js";
+import { gardenCommand } from "../modules/garden/commands/garden.js";
 import { givexpCommand } from "../modules/xp/commands/givexp.js";
 import { levelRoleCommand } from "../modules/xp/commands/levelRole.js";
 import { rankCommand } from "../modules/xp/commands/rank.js";
@@ -63,6 +64,7 @@ export const registeredCommands: SlashCommand[] = [
   serverinfoCommand,
   roleinfoCommand,
   rankCommand,
+  gardenCommand,
   xpCommand,
   givexpCommand,
   setxpCommand,

@@ -734,7 +734,7 @@ What happens:
 
 ## `/rank`
 Purpose:
-- Show a member's level, current rank, and progress toward the next role.
+- Show a member's garden, level, Discord rank, and garden unlocks.
 
 Who can use it:
 - Everyone.
@@ -744,8 +744,33 @@ Example:
 - `/rank user:@Ada`
 
 What happens:
-- Bot shows Level + current rank, XP, a progress bar to the next configured role, and Unlocked / Current / Locked for the whole ladder.
-- If no custom ranks exist yet, the default Beginner → Master ladder is used for display only.
+- Bot posts a garden card (plots + plants) with level, XP, active boost, and the next garden unlock.
+- Your own card includes Plant / Water / Harvest / Fertilize / Bag buttons.
+- Discord level-roles from `/level-role` still apply; they are listed as the current rank on the card.
+
+## `/garden`
+Purpose:
+- Tend plots, harvest produce, and spend harvests on a timed chat-XP boost.
+
+Who can use it:
+- Everyone.
+
+Example:
+- `/garden view`
+- `/garden plant seed:Radish`
+- `/garden water`
+- `/garden harvest`
+- `/garden inventory`
+
+What happens:
+- You start with 1 plot. More plots, seeds, watering (Lv 5), and fertilizer (Lv 20) unlock as you level.
+- Plants must grow before harvest. Waiting longer (up to a peak, then wilt) makes a stronger XP boost.
+- Harvests go into a bag (12 max). Using one starts a chat-XP multiplier. Only one boost at a time.
+
+Common errors:
+- `No empty plot. Harvest something first.`
+- `That plot is not ready to harvest yet.`
+- `The watering can unlocks at level 5.`
 
 ## `/xp`
 Purpose:

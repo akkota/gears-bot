@@ -1,4 +1,5 @@
 import { MessageFlags, type Interaction } from "discord.js";
+import { handleGardenComponent } from "../modules/garden/services/gardenButtons.js";
 import { handleHabitChallengeButton } from "../modules/habits/services/habitChallengeWorker.js";
 import {
   paginateProjects,
@@ -12,6 +13,18 @@ import { handleReactionRoleButtonToggle } from "../modules/reactionRoles/service
 import { commandMap } from "./commandRegistry.js";
 
 export async function handleInteraction(interaction: Interaction): Promise<void> {
+  if (
+    (interaction.isButton() || interaction.isStringSelectMenu()) &&
+    interaction.customId.startsWith("garden:")
+  ) {
+    try {
+      await handleGardenComponent(interaction);
+    } catch (error) {
+      console.error("Garden interaction failed:", error);
+    }
+    return;
+  }
+
   if (interaction.isButton()) {
     if (interaction.customId.startsWith("rr:toggle:")) {
       try {

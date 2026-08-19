@@ -36,6 +36,9 @@ They are applied manually in Supabase.
 - `repeat_messages`
 - `autoresponses`
 - `bot_embeds`
+- `garden_plots`
+- `garden_inventory`
+- `garden_active_boosts`
 
 ## Repository Rule
 

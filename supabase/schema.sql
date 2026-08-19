@@ -708,3 +708,49 @@ create table if not exists bot_embeds (
 
 create index if not exists idx_bot_embeds_guild
   on bot_embeds(guild_id);
+
+
+-- =========================
+-- GARDEN (XP BOOSTS)
+-- =========================
+-- Plots, harvested produce, and a single timed chat-XP multiplier.
+
+create table if not exists garden_plots (
+  guild_id text not null references guilds(guild_id) on delete cascade,
+  user_id text not null,
+  slot integer not null check (slot >= 0 and slot <= 5),
+  seed_id text not null,
+  planted_at timestamptz not null,
+  watered_at timestamptz,
+  fertilized boolean not null default false,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  primary key (guild_id, user_id, slot)
+);
+
+create index if not exists idx_garden_plots_owner
+  on garden_plots(guild_id, user_id);
+
+create table if not exists garden_inventory (
+  id uuid primary key default gen_random_uuid(),
+  guild_id text not null references guilds(guild_id) on delete cascade,
+  user_id text not null,
+  seed_id text not null,
+  quality text not null check (quality in ('wilted', 'young', 'mature')),
+  fertilized boolean not null default false,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists idx_garden_inventory_owner
+  on garden_inventory(guild_id, user_id);
+
+create table if not exists garden_active_boosts (
+  guild_id text not null references guilds(guild_id) on delete cascade,
+  user_id text not null,
+  multiplier numeric not null check (multiplier > 0),
+  expires_at timestamptz not null,
+  source_label text not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  primary key (guild_id, user_id)
+);
